@@ -1,0 +1,103 @@
+.hide{
+	display: none;
+}
+
+.hidden{
+	display: none;
+}
+
+#newContent{
+	align:right;
+}
+
+
+#jsonText{
+	height:200px;
+}
+body.connected #show_when_not_connected {
+ display: none;
+}
+
+body.connected #show_when_connected {
+ display: block;
+}
+
+body.not_connected #show_when_not_connected {
+ display: block;
+}
+
+body.not_connected #show_when_connected {
+ display: none;
+}
+
+#userInfo{
+/* 	height: 170px; */
+}
+#myInfo{
+	width: 100%;
+	background-image: -webkit-linear-gradient(left bottom, #ECECEC 22%, rgba(165, 165, 165, 0.2) 61%);
+	padding : 10px; 
+}
+
+#prog div{
+	background:green;	
+}
+
+#progressText{
+	color: #FC0000;
+	text-align: center;
+	margin-top: 10px;
+}
+#userRank{
+	margin-top: 15px;
+	margin-bottom: 20px;
+}
+#rankingViewTable{
+	margin: 10px auto;
+	text-align: center;
+}
+#viewDiv{
+	background-color: #ECECEC;
+	border : 1px solid gray;
+	width : 100%;
+/* 	height: auto; */
+}
+#mypage_interest{
+	width:30px;
+/* 	height: auto; */
+}
+#mypage_mappingPhoto{
+	width: 100%;
+}
+#mypage_ManUImage{
+	width: 100%;
+}
+.displayNone{
+	display: none;
+}
+#mappingInfoList{
+	width:100%;
+	margin-top: 50px;
+}
+.alt_page_navigation{
+	margin-bottom: 30px;
+}
+#mappingInfoListTitle{
+	width:100%;
+	color : white;
+	background-image: -webkit-linear-gradient(left , #B7D968 47%, #B7D968 74%, #B7D968 87%);
+	text-align: center;
+	padding-bottom: 0px;
+	font-weight: bold;
+}
+#rankTitle{
+	font-weight: bold;
+	margin-top: 50px;
+	width:100%;
+	color : white;
+	background-image: -webkit-linear-gradient(left , #B7D968 47%, #B7D968 74%, #B7D968 87%);
+}
+#mappingInfoListTitle2{
+	width: 100%;
+	padding-bottom: 20px;
+}

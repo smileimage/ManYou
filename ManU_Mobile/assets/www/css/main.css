@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+
+html { height: 100% }
+
+html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 {
+  -webkit-text-size-adjust:none;
+}
+body { 
+		height: 100%; 
+		margin: 0; 
+		padding: 0;
+    	background-color: #fff;
+    	font: 12px Arial;
+    	color: #323232;
+    }
+
+#header{
+	background-color: red;
+	height:7%;
+}
+
+#footer{
+	background-color: purple;
+	height:7%;	
+	text-align:center;
+}
+
+.hide{
+	display: none;
+}
+
+.hidden{
+	display: none;
+}
+
+#newContent{
+	align:right;
+}
+
+
+#jsonText{
+	height:200px;
+}
+
+body.connected #show_when_not_connected {
+ display: none;
+}
+
+body.connected #show_when_connected {
+ display: block;
+}
+
+body.not_connected #show_when_not_connected {
+ display: block;
+}
+
+body.not_connected #show_when_connected {
+ display: none;
+}
+
+.loginBtn {
+  background:url(https://s-static.ak.fbcdn.net/images/connect_sprite.png) no-repeat scroll left -188px #29447e;
+  display:inline-block;
+  line-height:14px;
+  outline:medium none;
+  padding:0 0 0 1px
+}
+
+.loginBtn span {
+  background:url(https://s-static.ak.fbcdn.net/images/connect_sprite.png) repeat scroll 0 0 #5f78ab;
+  border-bottom:1px solid #1a356e;
+  border-top:1px solid #879ac0;
+  color:#fff;
+  cursor:pointer;
+  display:block;
+  font-size:11px;
+  font-weight:bold;
+  margin:1px 1px 0 21px;
+  padding:2px 6px 3px;
+  font-family: 'Lucida Grande', Verdana, Arial, sans-serif;
+}

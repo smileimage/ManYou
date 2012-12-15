@@ -1,0 +1,186 @@
+@charset "UTF-8";
+input:button{
+	font-size : 12px;
+}
+
+#openDialog{
+	margin: 0 auto;		
+}
+#openDialog .detailLeftDiv{
+	width: 43%;
+	float: left;
+}
+#openDialog .detailRightDiv{
+	float: right;
+	width: 55%;
+}
+#detailLeftTopDiv .fbPhoto{
+	width:60px;
+	height:60px;
+	margin: 0 10px 0 0;
+}
+#detailLeftTopDiv ul .userInfoDate{
+	margin-left: 5%;
+	color:gray;
+}
+#detailLeftTopDiv ul .userInfoName{
+	font-weight: bold;
+}
+
+#detailMiContents li input{
+	width: 400px;
+	border:0;
+}
+
+#detailMiContents li textarea{
+	width: 395px;
+}
+
+#detailInvestiAnsItemList label{
+	float : left;
+	width : 180px;
+	font-size : 13px;
+	padding : 6px 0 0 12px;
+}
+
+#detailInvestiAnsItemList ul li{
+	list-style-type: none; 
+	display: block;
+	float:left;
+}
+#deleteBtn{
+	margin-top: 10px; 
+}
+
+.detailSelectBoxCss{
+	border:0 none;
+	color:black;
+	background-color:#F5F3E5; 
+	-webkit-appearance: none;
+	-moz-appearance: none;
+    appearance: none;
+}
+
+#removeLeftTopDiv{
+	width: 350px;
+}
+
+#removeLeftTopDiv ul li{
+	float:left;
+}
+
+#reContext {
+	width: 97%;
+	height: 25px;
+}
+
+.displayNone{
+	display:none;
+}
+.hide{
+	visibility:hidden;
+}
+.reply{
+ float : left;
+ border-bottom-style: groove;
+ margin-top : 10px;
+ width: 98%;
+}
+.reply ul li {
+ float : left;
+ margin : 0 5px 0 0 ;
+ list-style: none;
+}
+.reply .register{
+width: 100px;
+float: left;
+font-size: 15px;
+padding-left : 5px;
+}
+.reply .replyContext{
+ width : 100%;
+ margin: 5px 5px;
+}
+.reply img{
+	width : 20px;
+	height : 20px;
+}
+
+.reIcon{
+ width : 30px;
+ float : left;
+}
+
+.reply #replyBtn, .reply #replyDeleteBtn{
+ float : right;
+}
+
+.fluid_container {
+	margin: 0px auto;
+	max-width: 500px;
+	width: 90%;
+}
+
+#detailMiContents #miContext{
+	resize: initial;
+	border: 0;
+}
+
+#mapContainerOnDialog {
+	width: 405px;
+	height: 225px;
+	margin: 0 auto;
+	display:block;
+/*  	margin-top: 10px;  */
+}
+
+#map_canvasOnDialog{
+	width: 100%;
+	height: 100%;
+}
+
+.hidePlugin{
+	position: absolute;
+	left: -100000px;
+}
+
+#camera_wrap_1{
+	padding-top: 10px;
+}
+
+#fileListDiv{
+	z-index:1070;
+	position: absolute;
+	right: 27%;
+	top: 84%;
+	background-color: #FFC;
+	width: 22%;
+	border : 1px solid gray;
+	padding : 1%;
+	font-size : 12px;
+	line-height: 20px;
+	list-style-type: none; 
+}
+
+#attachmentList #attachment{
+	position: absolute;
+	top: 17.5%;
+	right: 31.3%;
+}
+
+.updateBtnGrp{
+	position: absolute;
+	right: 7%;
+	top: 85%;
+}
+
+.hidden {
+	display : none;
+}
+
+#removeRightTopDiv ul{
+	margin-bottom: 4%;
+}
+#userInfoBtnGrp{
+	margin-top: 4%;	
+}

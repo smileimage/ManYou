@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>커뮤니티 맵</title>
+
+<link rel="stylesheet" type="text/css" href="index.css">
+<link rel="stylesheet" type="text/css" href="../css/detailView.css">
+<link rel="stylesheet" type="text/css" href="../css/globalFnc.css">
+<link rel="stylesheet" type="text/css" href="../css/south-street/jquery-ui-1.8.22.custom.css">
+<link rel='stylesheet' id='camera-css'  href='../css/camera.css' type='text/css' media='all'>
+<link rel="stylesheet" type="text/css" href="../css/geocode.css">
+<script src="../js/plugin/jquery-1.7.2.js"></script>
+<script src="../js/init.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+<script src="../js/plugin/markerclusterer.js"></script>
+<script src="../js/plugin/json2.js"></script>
+<script src="../js/plugin/jquery-ui-1.8.21.custom.min.js"></script>
+<script src="../js/plugin/jquery.form.js"></script>
+<script src="../js/plugin/jquery.cookie.js"></script>
+<script src="../js/plugin/noty/jquery.noty.js"></script>
+<script src="../js/plugin/noty/layouts/center.js"></script>
+<script src="../js/plugin/noty/themes/default.js"></script>
+<script src="../js/facebook.js"></script>
+<script src="../js/loginField.js"></script>
+<script src="../js/detailView.js"></script>
+<script src="../js/globalFnc.js"></script>
+
+<script src="index.js"></script>
+<script src="community.js"></script>
+<script src="../js/util.js"></script>
+
+<script src="../js/controlFiles.js"></script>
+<script src="../js/outputForm.js"></script>
+
+<script src='../js/plugin/slide/jquery.mobile.customized.min.js'></script>
+<script src='../js/plugin/slide/jquery.easing.1.3.js'></script> 
+<script src='../js/plugin/slide/camera.js'></script>
+<script src="../js/geocode.js"></script>
+
+<script >
+localStorage.setItem('divId','mappingInfoList');
+</script>
+
+</head>
+
+<body>
+<div id='fb-root'></div>
+<div id="header_wrapper">
+	<header>
+		<div id="title"> 
+		<h1><a href="../main/index.html">
+			<img src="../images/title.png"/>
+			<span>Man U</span>
+		</a></h1>
+		</div>
+	<div id="loginField"></div>
+	
+	</header>
+</div>
+<div id='contentWrapper'>
+<section>
+	
+	<!-- google Map-->
+		<div id='googleMapDiv'>
+			<div id="searchForm">
+				<input id="searchAddress" type="text" placeholder="주소입력"> <input
+					id="encode" type="button" value="검색">
+			</div>
+			<div id="map_canvas"></div>
+		</div>
+	
+	<!-- 새글등록-->
+	    <div id="regMappingInfoForm" class="regMappingInfoForm">
+	    <button id="regContentBox" style="width:900px; display:none">새로운 정보를 등록해 보세요~</button>
+	    </div>
+	    <div id="regFormDiv">
+	    	<form id="regForm" enctype="multipart/form-data" method="POST">
+		</form>
+	    </div>
+	<!-- 새글등록-->
+	
+	
+	<!-- 등록정보 리스트-->
+	<div id="mappingInfoList"></div>
+	<input id="hideBtn" type="button" value="이전">
+	<input id="moreBtn" type="button" value="다음">
+	<!-- 등록정보 리스트-->
+</section>
+</div><div id="contentWrapperBottom"></div>
+
+<footer>
+		<ul class="footerMenu">
+			<li><a href="../main/index.html">Home</a></li>
+			<li><a href="../mypage/mypage.html" target="_parent">개인정보</a></li>
+			<li><a href="../main/intro.html" target="_parent">커뮤니티 맵이란?</a></li>
+			<li class="lastMenu"><a href="#">Contact</a></li>
+		</ul>
+		Copyright © 2012 <a href="#">Man U</a> 비트교육센터 종로지점 Java 26기 커뮤니티맵
+	</footer>
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+ul, li, ol {
+	list-style-type : none;
+}
+
+#nav {
+	border:1px solid #dbdbdb;
+	border-bottom:none; 
+	background:#f1f6f9; 
+	border-bottom:1px solid #dbdbdb;
+	padding-left:10px;
+}
+
+#nav > ul {
+	display:none;
+}
+
+#nav li ul li {
+/* 	background:url("../images/accordion/bulet.gif") 10px 10px no-repeat; */
+	padding:4px 0 3px 17px
+}
+
+#nav > li{
+/* 	background:url("../images/accordion/bg_menu_off.gif") no-repeat 0 0 !important;  */
+	font-weight:bold;
+}
+
+#nav > li.active {
+/* 	background:url("../images/accordion/bg_menu_on.gif") no-repeat 0 0 !important;  */
+	font-weight:bold;
+}

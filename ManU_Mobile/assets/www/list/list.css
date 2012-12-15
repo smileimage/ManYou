@@ -1,0 +1,87 @@
+@CHARSET "UTF-8";
+#listViewTitleBar{
+/* 	margin : 5px; */
+/* 	padding : 5px; */
+}
+
+#listViewFirstRow{
+/* 	position : relative; */
+}
+#listViewSecondRow{
+/* 	position : relative; */
+}
+
+#listViewTitle{
+/* 	border : 1px solid black; */
+	width : 57%;
+	position : relative;
+	float : left;
+	font-size : 14px;
+	face : 돋움체;
+	white-space:nowrap;
+	overflow : hidden;
+	text-overflow : ellipsis;
+/* 	letter-spacing : 5px; */
+}
+
+/* .focusTitle { */
+/* 	white-space:normal; */
+/* /* 	word-break:break-all; */ */
+/* } */
+
+#listViewMiDate{
+/* 	border : 1px solid black; */
+	width : 27%;
+	position : relative;
+	float : right;
+	font-size : 10px;
+	padding-top : 1px;  
+/* 	margin-top : 3px; */
+}
+
+#listViewCreatorName{
+/* 	border : 1px solid black; */
+	width : 27%;
+	float : right;
+	font-size : 12px;
+	letter-spacing : -1px;
+	font-style: oblique;
+	margin-top : 10px;
+}
+
+#listViewCommunityIcon{
+	float : left;
+	width : 35px;
+	height : 35px;
+	margin : 5px;
+}
+#listViewPhoto{
+	width : 100%;
+}
+
+.listViewContent{
+	background-color : #CCFF99;
+/* 	border : 1px solid #666; */
+/* 	border-radius : 5px; */
+	box-shadow:1px 1px 3px #666 inset;
+	padding : 10px;
+	margin : 0 10px 20px 5px;
+
+}
+
+.contentSubTitle{
+	font-size : 12px;
+	color : Blue;
+	font-weight:bold;
+}
+
+.contentSubContent{
+	font-size : 11px;
+	margin-left : 20px;
+}
+
+.listViewContent p{
+	margin-top : 0;
+	margin-bottom : 0;
+	padding :0;
+}

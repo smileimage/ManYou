@@ -1,0 +1,148 @@
+@CHARSET "UTF-8";
+#comm_create {
+	border : 1px solid red;
+/* 	margin : 5px; */
+	width : 900px;
+}
+
+#header{
+	border : 1px solid yellow;
+	height : 100px;
+	background : url('../images/Tulips.jpg') no-repeat; 
+}
+#map_invetigation{
+	border : 1px solid red;
+}
+#map_invetigation_type{width:400px;}
+#map_invetigation_item{width:350px;}
+#map_invetigation_ans{width:300px;}
+/* #map_invetigation_date{width:100px;} */
+/* #map_invetigation_select{width:50px;} */
+
+#selectbox {
+	margin-left : 8%;
+	background : #fff url('../images/arrow.gif') no-repeat right top;
+	width : 200px;
+	height : 30px;
+	border:0px solid #737373;
+	font: 18px solid blue;
+/* 	image : url('../images/arrow.gif') no-repeat;  */
+}
+
+
+/* -------------------map 관련 ----------------------- */
+#map_legends img{
+	width:20px;
+	heigth:20px;
+	margin:0;
+}
+#map_canvas {
+	margin-left : 8%;
+    width: 84%;
+    height: 450px;
+    border : 1px solid gray; 
+}
+
+#map_options{
+/* 	border : 1px solid red; */
+	font: 12px solid blue;	
+	width: 200px;
+/* 	padding: 0 20px 0 10px;  */
+	display : inline-block;
+}
+
+#map_options ul{
+		list-style-type: none;
+		-webkit-padding-start: 0px;
+}
+
+#location_lat ,#location_lng{
+	border: 0px;
+}
+
+ #community_name {
+	margin:0 0 10px 0;
+	width: 96%;
+	height : 20px;
+	background-color: #D7DFE7;
+	font-size: 13px;
+}
+
+#explain_input{
+	width : 96%;
+	height : 40px;
+	background-color: #D7DFE7;
+}
+
+
+.hidden{
+	display: none;
+}
+
+h3{
+	margin-left:8%;
+}
+#communityList{
+	border : 1px solid gray;
+	margin-left:8%;
+	width : 84%;
+	font-size: 12px;
+	font-family: sans-serif,monospace;
+	
+}
+#investiItemListTable{
+	border : 1px solid gray;
+	border-collapse :collapse;
+	margin-left:8%;
+	width: 84%;
+	font-size: 12px;
+	font-family: sans-serif,monospace;
+	min-height: 300px;
+}
+
+.investiDataTR{
+	border : 1px solid gray;
+}
+.investiItemType {
+	width : 200px;
+	
+}
+.investiItemName{
+	width : 200px;
+}
+
+.ansItemName{
+	width : 150px;
+	
+}
+
+#investiDiv{
+	border : 1px solid gray;
+	margin-left:6%;
+	font-size: 12px;
+	font-family: sans-serif,monospace;
+	width : 86%;
+	z-index : 13;
+	position : relative;
+	background-color: gray;
+}
+
+#targetInvestiItemSelectList{
+	width : 285px;
+}
+
+.targetDel{
+	width: 30px;
+	padding-left: 15px;
+}
+
+#communiContent{
+	color : skyblue;
+	padding: 10px;	
+}
+
+.ansType{
+	padding: 0;
+	margin : 1px 0 0 0;
+	list-style : none;
+}

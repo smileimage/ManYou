@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>커뮤니티 맵</title>
+<link rel="stylesheet" type="text/css" href="../main/index.css">
+<link rel="stylesheet" type="text/css" href="mypage.css">
+<link rel="stylesheet" type="text/css" href="../css/globalFnc.css">
+<link rel="stylesheet" type="text/css" href="../css/detailView.css">
+<link rel='stylesheet' type='text/css'
+	href='./fullcalendar/fullcalendar.css' />
+<link rel='stylesheet' type='text/css'
+	href='./fullcalendar/fullcalendar.print.css' media='print' />
+<link rel="stylesheet" type="text/css"
+	href="../css/south-street/jquery-ui-1.8.22.custom.css">
+	<link rel='stylesheet' id='camera-css'  href='../css/camera.css' type='text/css' media='all'>
+<script src="../js/plugin/jquery-1.7.2.js"></script>
+<script src="../js/init.js"></script>
+<script src="../js/plugin/jquery.cookie.js"></script>
+<script src="../js/plugin/jquery.form.js"></script>
+<script type="text/javascript"
+	src="../js/plugin/jquery-ui-1.8.21.custom.min.js"></script>
+<script type='text/javascript' src='fullcalendar/fullcalendar.min.js'></script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+<script src="../js/plugin/markerclusterer.js"></script>
+<script src='../js/plugin/slide/jquery.mobile.customized.min.js'></script>
+<script src='../js/plugin/slide/jquery.easing.1.3.js'></script> 
+<script src='../js/plugin/slide/camera.js'></script>
+<script type="text/javascript" src="../js/plugin/noty/jquery.noty.js"></script>
+<script type="text/javascript" src="../js/plugin/noty/layouts/center.js"></script>
+<script type="text/javascript" src="../js/plugin/noty/themes/default.js"></script>
+<script src="../js/util.js"></script>
+<script type="text/javascript" src="../js/loginField.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="js/graph.js"></script>
+<script type="text/javascript" src="../js/facebook.js"></script>
+<script src="js/mypage.js"></script>
+<script src="../main/community.js"></script>
+
+<script src="js/infobubbles.js"></script>
+<script src="../js/globalFnc.js"></script>
+<script src="../js/detailView.js"></script>
+<script src="../js/outputForm.js"></script>
+<script src="../js/geocode.js"></script>
+<script src="../js/controlFiles.js"></script>
+<script >
+localStorage.setItem('divId','removeListTag');
+
+</script>
+</head>
+<body>
+	<div id="fb-root"></div>
+	<div id="header_wrapper">
+		<header>
+			<div id="title">
+				<h1>
+					<a href="../main/index.html"> <img src="../images/title.png" />
+						<span>Man U</span></a>
+				</h1>
+			</div>
+			<div id="loginField"></div>
+		</header>
+	</div>
+
+	<div id='contentWrapper'>
+		<section>
+			<div id='tabs'>
+				<ul>
+					<li><a href='#tabs-1'>요약</a></li>
+					<li><a href='#tabs-2'>공헌도</a></li>
+<!-- 					<li><a href='#tabs-3'>커뮤니티</a></li> -->
+					<li><a href='#googleMap'>지도보기</a></li>
+				</ul>
+				<div id='tabs-1'>
+					<table id="userinfoList">
+					</table>
+				</div>
+				<div id='tabs-2'>
+					<div id='tabs1'></div>
+				</div>
+<!-- 				<div id='tabs-3'> -->
+<!-- 					<div id="communityGraph"> -->
+<!-- 						<div id="tabs-7"></div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+				<div id='googleMap'>
+					<div id="map_containerOnTab" title="My List on Map"></div>
+				</div>
+			</div>
+			<div id='calendar'></div>
+
+			<!-- 등록정보 리스트-->
+			<div id="mappingInfoList">
+				<div id="removeListTag"></div>
+			</div>
+			<!-- 등록정보 리스트-->
+			<div id="map_container" title="Location Map"></div>
+			<input id="hideBtn" class="displayNone" type="button" value="이전">
+			<input id="moreBtn" type="button" value="다음">
+		</section>
+	</div>
+	<div id="contentWrapperBottom"></div>
+	<footer>
+		<ul class="footerMenu">
+			<li><a href="../main/index.html">Home</a></li>
+			<li><a href="../mypage/mypage.html" target="_parent">개인정보</a></li>
+			<li><a href="../main/intro.html" target="_parent">커뮤니티 맵이란?</a></li>
+			<li class="lastMenu"><a href="#">Contact</a></li>
+		</ul>
+		Copyright © 2012 <a href="#">Man U</a> 비트교육센터 종로지점 Java 26기 커뮤니티맵
+	</footer>
+</body>
+</html>
+
+

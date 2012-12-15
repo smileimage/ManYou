@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+/* .modalWindow{ */
+/* 	width: 100%; */
+/* /*     z-index: 1500; */ */
+/*     background: white; */
+/*     opacity: 0.7; */
+/* } */
+/* selectbox */
+#registerFormPage ul li{
+	height:20px;
+} 
+div .ui-select{
+	width:90%;
+	margin:0 auto;
+	margin-top:10px;
+}
+
+#investiItemDiv{
+	width:90%;
+	margin: 0 auto;
+}
+#investiItemType{
+	float:left;
+}
+#investiItemType ul, #investiAnsItemType ul, #investiAnsItemListUl ul{
+	padding : 0;
+	margin : 5px 5px 5px 0;
+}
+#investiAnsItemListUl ul label{
+	margin-top: 3px;
+}
+#investiItemType ul li{
+	float : left;
+	list-style-type: none; 
+	display: block; 
+}
+#investiAnsItemListUl{
+	float: left;
+}
+
+#investiAnsItemListUl label{
+	padding : 0;
+	margin : 0;
+	float : left;
+	width : 150px;
+}
+#investiAnsItemListUl ul li{
+	float:left;
+	list-style-type: none; 
+	display: block; 
+}
+
+#investiAnsItemType{
+	float: left;
+}
+
+/* selectbox end */
+#registerFormPage{
+	top:0;
+	left: 0;
+	width:100%;
+	z-index: 0;
+}
+#search{
+}
+#registerForm{
+	width: 100%;
+}
+
+#miTitle , #address{
+	width:90%;
+	font-size:13px;
+	margin: 0 auto;
+	margin-top: 10px; 
+}
+#registerForm textarea{
+	border: 0;
+	width:90%;
+	font-size:13px;
+	margin-top: 50px;
+	margin: 10px auto;
+}
+#photoBtn{
+	width:35%;
+}
+
+#btnGrpDiv, #addPhotoDiv, #selectDiv{
+	width:90%;
+	margin: 0 auto;
+}
+ 
+#regAddBtn, #regResetBtn, #twitterBtn, #facebookBtn{
+	height: 35px;
+	width: 22%;
+	margin: 3px;
+	float: right;
+	border-top: 1px solid white;
+	border-color: rgba(202, 179, 179, .3);
+	-webkit-border-radius: 1em /*{global-radii-buttons}*/;
+	border-radius: 1em /*{global-radii-buttons}*/;
+}
+{
+	height: 35px;
+	width: 25%;
+	margin: 3px;
+	float: right;
+	border-top: 1px solid white;
+	border-color: rgba(202, 179, 179, .3);
+	-webkit-border-radius: 1em /*{global-radii-buttons}*/;
+	border-radius: 1em /*{global-radii-buttons}*/;
+}
+
+
+#photo{
+	width : 60px;
+	height : 60px;
+}
+/* #registerForm textarea{ */
+/* 	max-width : 90%; */
+/* 	max-height : 20%; */
+/*  	width : 90%; */
+/*  } */
+#showRegisterFormBtn{
+/* 	margin-right: 10px; */
+}
+

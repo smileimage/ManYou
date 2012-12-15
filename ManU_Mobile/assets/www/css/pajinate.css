@@ -1,0 +1,35 @@
+.ellipse{
+	float: left;
+}
+
+
+.page_navigation , .alt_page_navigation{
+	padding-bottom: 10px;
+}
+
+.page_navigation a, .alt_page_navigation a{
+	padding: 2.5px 7px;
+	margin: 2px, 5px;
+	color:black;
+	text-decoration:none;
+/* 	font-family: Tahoma; */
+	font-size: 12.5px;
+	font-weight : bold;
+	background-color:#EEE;
+}
+.alt_page_navigation{
+	text-align: center;
+	padding-bottom: 0px;
+}
+.active_page{
+	background-color:white !important;
+	color:black !important;
+}	
+
+.content, .alt_content{
+	color: black;
+}
+.ui-body-c, .ui-overlay-c {
+color: #333;
+text-shadow: 0 0px 0 white;
+}

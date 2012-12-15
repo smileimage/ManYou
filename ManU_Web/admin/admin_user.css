@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+.layer2{
+	height : 18px;
+	width : 20px;
+	position : absolute;
+	z-index : 16;
+	margin : 2px 0 0 5px;
+}
+
+#searchName {
+	height : 20px;
+	font-size : 15px;
+	padding: 0 92px 0 32px; 
+	width : 50px;
+	font:  bold 100% sans-serif;
+}
+
+#pageControlBar{
+/* 	align : center; */
+/* 	margin : auto; */
+}

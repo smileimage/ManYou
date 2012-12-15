@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+#pageView .detailcount{
+	float : right;
+	margin-right : 15px;
+	
+}
+
+#pageView .writedate_view
+{
+	float : right;
+	margin-right : 10px;
+	
+}
+
+#pageView .gbName_view{
+	margin-left : 35px;
+	list-style-type : none;
+}
+
+#pageView #gbName_view{
+	margin-left : 15px;
+	list-style-type : none;
+}
+
+#pageView .gbContext_viewLi{
+	border : 1px dotted green;
+	margin : 0 5px 0 40px; 
+	padding : 5px;
+	
+}
+
+#pageView .replylevel1{
+background: url("../images/replyicon.png") 5px 21px no-repeat;
+}
+
+#gbContext_viewLi{
+	border : 1px solid gray;
+	margin : 0 5px; 
+	min-height : 210px;
+	
+}
+
+#title_view{
+	list-style-type : none;
+	margin:15px;
+}
+
+#scrollList .listLi{
+/* 	margin: 0 10px;	 */
+}
+
+#scrollList{
+	margin-top
+}
+
+#scrollList .ui-content{
+	margin: 0px;
+}
+
+#scrollList .gbtitleUi{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	vertical-align: middle;
+	padding: 20px;
+	font-size : 14px;
+}
+
+
+#scrollList .listUL{
+	margin-top: 0px;
+}
+
+#scrollList .ui-listview-filter{
+	margin : 0px;
+}
+
+#pageViewDetail.ui-listview{
+/* 	margin : 0px; */
+}
+
+#pageViewDetail #gbcontext{
+	margin : 10px;
+	width:95%;
+}
+
+a .ui-li-thumb{
+	position : relative;
+	margin-top : 4px;
+}
+
+a .ui-link-inherit{
+	min-height : 5px;
+}
+.ui-li-has-thumb .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-thumb {
+min-height: 5px;
+}
+a:link    {text-decoration:none;}
+a:visited {text-decoration:none;}
+a:hover   {text-decoration:none;}
+a:active  {text-decoration:none;}

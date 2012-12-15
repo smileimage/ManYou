@@ -1,0 +1,142 @@
+@charset "utf-8";
+
+#createNothing{
+    text-align :center;
+    width: 920px;
+    padding-top: 20px;
+    clear:both;
+}
+#createNothing h1{
+	margin : 2px;
+	color : red;
+	font-style : inherit;
+	display: block;
+}
+
+#tabs {
+	margin: 5px auto;
+	margin-bottom: 15px;
+	width: 530px;
+	height: 290px;
+	float: left;
+	top: 5px;
+	left: 20px;
+}
+
+#tabs1 { /* 	504.290 */
+	position: absolute;
+	left: 5px;
+	top: 53px;
+	width: 540px;
+	height: 245px;
+}
+
+#communityGraph {
+	position: absolute;
+	left: 5px;
+	top: 53px;
+	width: 540px;
+	height: 245px;
+}
+
+#googleMap {
+	padding: 5px;
+}
+
+#map_containerOnTab {
+	width: 520px;
+	height: 240px;
+}
+
+
+#interest_community_name {
+	width: 300px;
+	font-size: 25px;
+	margin: 5px 0 0 650px;
+}
+
+#calendar {
+	float: right;
+	width: 350px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 12px;
+	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+}
+
+#map_canvas {
+	color: black;
+	/* 	font-size: 15px; */
+}
+#removeListTag{
+	clear:both;
+}
+
+#removeListTag div {
+	margin: 10px auto;
+	width: 880px;
+}
+
+#userinfoList {
+	width: 450px;
+	height: 100px;
+}
+#fbimg{
+	width : 100px;
+	height : 100px;
+}
+.hide{
+	display:none;
+}
+
+.hidePlugin{
+	position: absolute;
+	left: -10000px;
+}
+
+#prog div{
+	background:green;	
+}
+
+#progressText{
+	position: absolute;
+	bottom: 34%;
+	left: 33%;
+	color: #FC0000;
+}
+
+#myRanking span{
+	margin-right : 20%;
+}
+
+#viewDiv{
+	z-index:1070;
+	position: absolute;
+	right: 50%;
+	top: 95%;
+	background-color: #FFC;
+	width: 40%;
+	border : 1px solid gray;
+	padding : 2%;
+	font-size : 12px;
+	line-height: 20px;
+	list-style-type: none;
+	text-align: center;
+}
+
+#favorList{
+	z-index:1070;
+	position: absolute;
+	right: 0%;
+	top: 32%;
+	background-color: #FFC;
+	width: 40%;
+	border : 1px solid gray;
+	padding : 1%;
+	font-size : 12px;
+	line-height: 20px;
+	list-style-type: none;
+	text-align: center;
+}
+
+

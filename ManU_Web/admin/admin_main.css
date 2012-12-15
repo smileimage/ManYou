@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+#approveList, #list{
+	border : 1px solid blue;
+	margin-bottom: 50px;
+}
+
+#delBtn, #approveBtn{
+}
+
+.hide {
+	display: none;
+}

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.AdminDao">
+		
+	<insert id="insertCommunity" parameterType="InterestCommunity"  >
+		insert into interest_community(
+			CREATE_DATE,
+			INTEREST_DOMAIN, 
+			OWNER_UID,
+			INTEREST_AREA,
+			TARGET_PEOPLE_NO,
+			INTEREST_COMMUNITY_NAME,
+			INTEREST_COMMUNITY_CONTENT)
+		values(
+			now(),
+			#{interestDomain}, 
+			#{ownerUid},
+			#{interestArea},
+			#{targetPeopleNo},
+			#{interestCommunityName},
+			#{interestCommunityContent})
+			
+	</insert> 	
+	
+	<update id="update" parameterType="InterestCommunity">
+	UPDATE interest_community SET
+			INTEREST_DOMAIN=#{interestDomain}, 
+			OWNER_UID=#{ownerUid},
+			INTEREST_AREA=#{interestArea},
+			TARGET_PEOPLE_NO=#{targetPeopleNo},
+			INTEREST_COMMUNITY_NAME=#{interestCommunityName},
+			INTEREST_COMMUNITY_CONTENT=#{interestCommunityContent}
+		WHERE INTEREST_COMMUNITY_NO=#{interestCommunityNo}
+	</update>
+		
+	<resultMap id="communityResult" type="InterestCommunity">
+		<result property="interestCommunityNo" column="INTEREST_COMMUNITY_NO" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="interestDomain" column="INTEREST_DOMAIN" />
+		<result property="ownerUid" column="OWNER_UID" />
+		<result property="interestArea" column="INTEREST_AREA" />
+		<result property="targetPeopleNo" column="TARGET_PEOPLE_NO" />
+		<result property="targetPeopleName" column="TARGET_PEOPLE_NAME" />
+		<result property="interestCommunityName" column="INTEREST_COMMUNITY_NAME" />
+		<result property="interestCommunityContent" column="INTEREST_COMMUNITY_CONTENT" />
+	</resultMap>
+	
+	<select id="selectList"  resultType="InterestCommunity"  resultMap="communityResult">
+		SELECT 
+			INTEREST_COMMUNITY_NO  ,
+			CREATE_DATE ,
+			INTEREST_DOMAIN , 
+			OWNER_UID,
+			INTEREST_AREA ,
+			interest_community.TARGET_PEOPLE_NO,
+			target_people.TARGET_PEOPLE_NAME,
+			INTEREST_COMMUNITY_NAME ,
+			INTEREST_COMMUNITY_CONTENT
+			FROM interest_community JOIN target_people ON
+			target_people.TARGET_PEOPLE_NO = interest_community.TARGET_PEOPLE_NO
+			ORDER BY interest_community_no DESC
+			
+	</select>
+	
+	<select id="selectAnsTypeList"  resultType="AnsType"  >
+		
+		SELECT 
+			ANS_TYPE_NO as ansTypeNo,
+			ANS_TYPE_NAME as ansTypeName
+		 FROM ans_type
+	</select>
+	
+	<select id="selectOneList"  
+	parameterType="int"   
+	resultType="InterestCommunity"  
+	resultMap="communityResult">
+		SELECT 
+			INTEREST_COMMUNITY_NO  ,
+			CREATE_DATE ,
+			INTEREST_DOMAIN , 
+			OWNER_UID,
+			INTEREST_AREA ,
+			interest_community.TARGET_PEOPLE_NO,
+			target_people.TARGET_PEOPLE_NAME,
+			INTEREST_COMMUNITY_NAME ,
+			INTEREST_COMMUNITY_CONTENT
+			FROM interest_community JOIN target_people ON
+			target_people.TARGET_PEOPLE_NO = interest_community.TARGET_PEOPLE_NO
+			WHERE INTEREST_COMMUNITY_NO=#{value}
+	</select>
+	
+	
+	
+	<resultMap id="mapselectTargetList"  type="TargetPeople">
+		<result property="targetPeopleNo" column="TARGET_PEOPLE_NO" />
+		<result property="targetPeopleName" column="TARGET_PEOPLE_NAME" />
+	</resultMap>
+	<select id="selectTargetList"  resultType="TargetPeople" resultMap="mapselectTargetList">
+		SELECT 
+			TARGET_PEOPLE_NO,
+			TARGET_PEOPLE_NAME
+			FROM target_people
+	</select>
+	
+	<select id="selectInvestiItemList" 
+			 resultType="InvestiItem" >
+
+	SELECT
+	investi_item.investi_item_no as investiItemNo,
+	investi_item.investi_item_type as investiItemType,
+	investi_item.investi_item_name as investiItemName,
+	investi_item.ans_type_no as ansTypeNo,
+	ans_type.ans_type_name as ansTypeName
+	FROM investi_item inner JOIN ans_type ON
+	investi_item.ans_type_no = ans_type.ans_type_no
+	ORDER BY
+	investi_item_type , investiItemName
+	
+	</select>
+	
+	<insert id="insertTargetInvestiItem" parameterType="TargetInvestiItem"  >
+		insert into target_investi_item(
+			INVESTI_ITEM_NO,
+			INTEREST_COMMUNITY_NO)
+		values(
+			#{investiItemNo},
+			#{interestCommunityNo})
+	</insert> 
+
+
+	<select id="selectTargetInvestiItemList" 
+	 parameterType="int"   
+	 resultType="InvestiItem" >
+	SELECT
+	target_investi_item.INTEREST_COMMUNITY_NO as interestCommunityNo,
+	investi_item.investi_item_no as investiItemNo,
+	investi_item.INVESTI_ITEM_TYPE as investiItemType,
+	investi_item.investi_item_name as investiItemName,
+	ans_type.ans_type_name as ansTypeName
+	FROM target_investi_item inner JOIN (investi_item inner JOIN ans_type ON
+	investi_item.ans_type_no = ans_type.ans_type_no) ON
+	target_investi_item.investi_item_no = investi_item.investi_item_no
+	WHERE target_investi_item.INTEREST_COMMUNITY_NO= #{value}
+	ORDER BY investiItemType   , investiItemName
+	</select>
+	
+	<delete id="deleteTargetInvestiItem" parameterType="map"> 
+		DELETE FROM target_investi_item 
+		WHERE INVESTI_ITEM_NO=#{investiItemNo} AND 
+		INTEREST_COMMUNITY_NO=#{interestCommunityNo} 
+	</delete>
+	
+	
+	
+	<insert id="insertInvestiItem" parameterType="InvestiItem"  >
+		insert into investi_item(
+			INVESTI_ITEM_NAME,
+			INVESTI_ITEM_TYPE,
+			ANS_TYPE_NO
+			)
+		values(
+			#{investiItemName},
+			#{investiItemType},
+			#{ansTypeNo})
+	</insert> 
+	
+	<update id="updateInvestiItem" parameterType="InvestiItem">
+	UPDATE investi_item SET
+			INVESTI_ITEM_NAME=#{investiItemName}, 
+			INVESTI_ITEM_TYPE=#{investiItemType},
+			ANS_TYPE_NO=#{ansTypeNo}
+		WHERE INVESTI_ITEM_NO=#{investiItemNo}
+	</update>
+	
+	<delete id="deleteInvestiItem" parameterType="int"> 
+		DELETE FROM investi_item 
+		WHERE INVESTI_ITEM_NO=#{investiItemNo}
+	</delete>
+<!--	
+	<insert id="insertAnsItem" parameterType="Ans_item"  >
+		insert into ans_item(
+			ANS_ITEM_NAME,
+			INTEREST_COMMUNITY_NO,
+			INVESTI_ITEM_NO)
+		values(
+			#{ansItemName}, 
+			#{interestCommunityNo},
+			#{investiItemNo})
+	</insert> 
+
+	
+-->
+<!-- 	<resultMap id="mapselectInvestiItemList"  type="InvestiItemList"> -->
+<!-- 		<result property="interestCommunityNo" column="target_investi_item.INTEREST_COMMUNITY_NO" /> -->
+<!-- 		<result property="investiItemNo" column="target_investi_item.INVESTI_ITEM_NO" /> -->
+<!-- 		<result property="investiItemName" column="investi_item.INVESTI_ITEM_NAME" /> -->
+<!-- 		<result property="investiItemType" column="investi_item.INVESTI_ITEM_TYPE" /> -->
+<!-- 		<result property="ansItemName" column="ans_item.ANS_ITEM_NAME" /> -->
+<!-- 		<result property="ansinterestCommunityNo" column="ans_item.INTEREST_COMMUNITY_NO" /> -->
+<!-- 		<result property="ansinvestiItemNo" column="ans_item.INVESTI_ITEM_NO" /> -->
+<!-- 	</resultMap> -->
+
+<!--	
+	
+	
+	
+	
+	<select id="selectTargetInvestiItem" 
+	 parameterType="int"   
+	 resultType="TargetInvestiItemList" >
+	 
+	    SELECT
+			target_investi_item.INTEREST_COMMUNITY_NO as interestCommunityNo,
+			target_investi_item.INVESTI_ITEM_NO as investiItemNo,
+			investi_item.INVESTI_ITEM_TYPE as investiItemType,
+          	investi_item.investi_item_name as investiItemName
+		FROM investi_item inner JOIN target_investi_item ON
+			 investi_item.INVESTI_ITEM_NO = target_investi_item.INVESTI_ITEM_NO
+		WHERE target_investi_item.INTEREST_COMMUNITY_NO=#{value}
+		
+		-->
+<!-- 		SELECT -->
+<!-- 			INTEREST_COMMUNITY_NO as interestCommunityNo, -->
+<!-- 			INVESTI_ITEM_NO as investiItemNo -->
+<!-- 		FROM target_investi_item -->
+<!-- 		WHERE INTEREST_COMMUNITY_NO=#{value} -->
+<!-- 	</select> -->
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+

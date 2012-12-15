@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+/* UL{
+	float:left;
+	list-style-type:none;
+}
+LI{
+	float:left;
+} */
+input:button{
+	font-size : 12px;
+}
+.detailLeftDiv{
+	width:380px;
+	height:600px;
+	float:left;	
+}
+.detailRightDiv{
+	width:560px;
+	float:right;	
+}
+.fbPhoto{
+	width:60px;
+	height:60px;
+	margin: 0 10px 0 0;
+	float:left;
+}
+.userInfoText{
+	width:310px;
+	padding : 0 0 0 5px;
+}
+
+
+
+.detailImage{
+	width:560px;
+	height:400px
+}
+.register, .detailBtn{
+	width:300px;
+	height:20px;
+	float:left;
+}
+.context{
+	width:390px;	
+}
+.replyRegister{
+	width:110px;
+	float:left;	
+}

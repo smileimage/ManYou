@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>커뮤니티 메인화면</title>
+<link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="admin_main.css">
+<script type="text/javascript" src="../js/plugin/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../js/util.js"></script>
+<script type="text/javascript" src="admin_main.js"></script>
+
+</head>
+<body>
+
+	<div id="header"></div>
+
+	<div id="main">
+		<div>
+			<label style="font-size: 20px;">회원 삭제 요청 목록</label> 
+			<input id="delBtn" type="button" value="삭제"><br>
+		</div>
+
+		<div id="list">
+			<table id="centerList">
+				<tr class="headerTR">
+					<th>커뮤니티</th>
+					<th>회원명</th>
+					<th>이메일</th>
+					<th>사유</th>
+					<th>요청일자</th>
+					<th>삭제<input type="checkbox" id="totalCheck"></th>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

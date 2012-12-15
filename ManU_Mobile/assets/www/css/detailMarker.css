@@ -1,0 +1,72 @@
+@CHARSET "UTF-8";
+
+#detailTitleView {
+	margin-left : 10px;
+	margin-rigth : 10px;
+	position: absolute;
+	width : 85%;
+	bottom : 40px;
+	z-index : 10;
+}
+
+#detailTitle{
+/* 	border : 1px solid black; */
+	width : 57%;
+	position : relative;
+	float : left;
+	font-size : 14px;
+	face : 돋움체;
+	overflow : hidden;
+	white-space:nowrap;
+/* 	letter-spacing : 5px; */
+}
+
+#detailMiDate{
+/* 	border : 1px solid black; */
+	width : 27%;
+	position : relative;
+	float : right;
+	font-size : 10px;
+	padding-top : 1px;  
+/* 	margin-top : 3px; */
+}
+
+#detailCreatorName{
+/* 	border : 1px solid black; */
+	width : 27%;
+	float : right;
+	font-size : 12px;
+	letter-spacing : -1px;
+	font-style: oblique;
+	margin-top : 10px;
+}
+
+#detailCommunityIcon{
+	float : left;
+	width : 35px;
+	height : 35px;
+	margin : 5px;
+}
+
+.contentSubTitle{
+	font-size : 12px;
+	color : Blue;
+	font-weight:bold;
+}
+
+.contentSubContent{
+	font-size : 11px;
+	margin-left : 20px;
+}
+
+#detailContent{
+	padding : 10px;
+/* 	padding-left : 10px; */
+/* 	padding-bottom : 15px; */
+}
+
+#detailContent p{
+	margin-top : 0;
+	margin-bottom : 0;
+	padding :0;
+}

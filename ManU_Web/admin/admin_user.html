@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>커뮤니티 유저관리</title>
+<link rel="stylesheet" href="../css/common.css"/>
+<link rel="stylesheet" href="../css/style.css" media="screen"/>
+<link rel="stylesheet" href="../css/jquery.autocomplete.css"/>
+<link rel="stylesheet" href="admin_user.css"/>
+
+
+<script type="text/javascript" src="../js/plugin/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../js/util.js"></script>
+
+<script type="text/javascript" src="../js/plugin/jquery.pajinate.js"></script>
+<script type="text/javascript" src="../js/plugin/jquery.ui.core.js"></script>
+<script type="text/javascript" src="../js/plugin/jquery.ui.position.js"></script>
+<script type="text/javascript" src="../js/plugin/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="../js/plugin/jquery.ui.autocomplete.js"></script>
+<script type="text/javascript" src="admin_user.js"></script>
+
+</head>
+<body>
+<div id="header"></div>
+<div id="main">
+
+	<div>
+		<div>
+			<label for="userList">유저 리스트</label>
+		</div>
+		<div>
+			<img class="layer2" src="../images/search.jpg">
+			<input id="searchName" type="text" placeholder="회원 명">
+<!-- 		<input id="userSearch" type="button" value="회원검색"> -->
+		</div>
+		<div id="list">
+			<table id="centerList">
+
+			</table>
+			
+		</div>
+<!-- 		<div id="pageControlBar" align="center"> -->
+<!-- 			<input type="button" id="prevPage" value="이전"> -->
+<!-- 			<input type="button" id="nextPage" value="다음"> -->
+<!-- 		</div>		 -->
+		
+	</div>
+	<div id="pageControlBar">
+	</div>
+</div>
+
+</body>
+</html>

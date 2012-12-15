@@ -1,0 +1,9 @@
+.ui-li-accordion { 
+	height:100%;
+	background-color: #000000;
+	display: none; 
+	position: relative;
+}
+.ui-li-accordion-head{
+	height: 100%;
+}

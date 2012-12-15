@@ -1,0 +1,80 @@
+<style type="text/css">
+#map_canvas_Load{
+ 	width: 900px; 
+	height:300px;
+	margin: 0 auto;
+}
+#communityMappingInfoList table{
+	border:1px solid black;
+	margin-top:  10px;
+	width : 62%;
+}
+.detailImg{
+	position: relative;
+	left: 30%;
+	width: 35px;
+}
+
+.mappingInfoTable tr:first-child td:first-child {
+	padding-top: 9%;
+}
+
+.colCssHead{
+	width:5%;
+}
+.colCssImg{
+	width:23%;
+}
+.colCssDate{
+	width:26%;
+}
+.colCssName{
+	width:8%;
+}
+
+</style>
+<script>
+
+$(window).ready(function(e) {
+	localStorage.setItem('divId','communityMappingInfoList');
+});
+
+</script>
+
+<!-- google Map -->
+	     <div id="searchForm">
+	      	<input id="searchAddress" type="text" placeholder="주소입력">
+	      	<input id="encode" type="button" value="검색" >
+	     </div>
+	     <div id="map_canvas_Load"></div>
+<!-- google Map -->
+<!-- 새글등록-->
+		<div id="regMappingInfoForm" class="regMappingInfoForm">
+			<button id="regContentBox" style="width: 900px; display: none">새로운
+				정보를 등록해 보세요~</button>
+		</div>
+		<div id="regFormDiv">
+			<form id="regForm" enctype="multipart/form-data" method="POST"></form>
+		</div>
+<!-- 새글등록-->
+
+<!-- 커뮤니티-->
+<div id="mainContent" style="height:901px">
+	<div id ="communityLeft">
+		<div id="onelineBoard">
+			
+		</div>
+		<div id ="oneLineBtn">
+			<input id="oneHideBtn" type="button" value="이전" >
+			<input id="oneMoreBtn" type="button" value="다음">
+		</div>
+	</div>
+	<div id="communityMappingInfoList">
+	
+	</div>
+	<div id ="communityBtn">
+		<input id="hideBtn" type="button" value="이전">
+		<input id="moreBtn" type="button" value="다음">
+	</div>
+</div>
+<!-- 커뮤니티-->

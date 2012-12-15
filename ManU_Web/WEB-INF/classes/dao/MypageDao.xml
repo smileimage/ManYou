@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <cache></cache> -->
+
+<mapper namespace="dao.MypageDao" >
+    
+	<resultMap id="MappingGraph" type="Mypage">
+		<id property="fbUid" column="FB_UID" />
+		<result property="point" column="sum(point)" />
+	    <result property="pointDate" column="POINT_DATE" />
+	    <result property="fbName" column="FB_NAME" />
+	    <result property="fbPhotoPath" column="FB_PHOTO_PATH" />
+	</resultMap>
+	<resultMap id="UserInfoResult" type="MypageUserInfo">
+		<id property="fbUid" column="FB_UID" />
+		<result property="miTitle" column="MI_TITLE" />
+	    <result property="miDate" column="MI_DATE" />
+	    <result property="miPropose" column="MI_PROPOSE" />
+	    <result property="fbName" column="FB_NAME" />
+	    <result property="fbPhotoPath" column="FB_PHOTO_PATH" />
+	    <result property="interestCommunityName" column="INTEREST_COMMUNITY_NAME" />
+	</resultMap>
+	<resultMap id="MappingInfoResult" type="MypageCalList">
+		<id property="fbUid" column="FB_UID" />
+		<result property="lat" column="LAT" />
+		<result property="lng" column="LNG" />
+		<result property="address" column="ADDRESS" />
+		<result property="miDate" column="MI_DATE" />
+		<result property="miTitle" column="MI_TITLE" />
+		<result property="miContext" column="MI_CONTEXT" />
+		<result property="investiItemName" column="INVESTI_ITEM_NAME" />
+		<result property="investiItemType" column="INVESTI_ITEM_TYPE" />
+		<result property="ansItemName" column="ANS_ITEM_NAME" />
+		<result property="interestCommunityContent" column="INTEREST_COMMUNITY_CONTENT" />
+		<result property="interestCommunityName" column="INTEREST_COMMUNITY_Name" />
+	</resultMap>
+	
+	<resultMap id="MypageContextList" type="MypageCalList">
+		<id property="miNo" column="MI_NO" />
+		<id property="fbUid" column="FB_UID" />
+		<result property="lat" column="LAT" />
+		<result property="lng" column="LNG" />
+		<result property="fbName" column="FB_NAME" />
+		<result property="address" column="ADDRESS" />
+		<result property="miTitle" column="MI_TITLE" />
+		<result property="miContext" column="MI_CONTEXT" />
+		<result property="miDate" column="MI_DATE" />
+		<result property="investiItemName" column="INVESTI_ITEM_NAME" />
+		<result property="investiItemType" column="INVESTI_ITEM_TYPE" />
+		<result property="ansTypeItemName" column="ANS_TYPE_ITEM_NAME" />
+		<result property="interestCommunityName" column="INTEREST_COMMUNITY_NAME" />
+		<result property="pathName" column="PATH_NAME" />
+		<result property="fileMask" column="FILE_MASK" />
+		<result property="fileSeq" column="Min(general_board_file.FILE_SEQ)" />
+	</resultMap>
+	
+	<resultMap id="MypageMembersResult" type="MypageMembers">
+		<id property="fbUid" column="FB_UID" />
+		<result property="fbEmail" column="FB_EMAIL" />
+		<result property="fbName" column="FB_NAME" />
+		<result property="fbSex" column="FB_SEX" />
+		<result property="fbPhotoPath" column="FB_PHOTO_PATH" />
+		<result property="pointDate" column="POINT_DATE" />
+	</resultMap>
+	
+ 	<resultMap id="MypageCommunityResult" type="MypageCommunity">
+ 		<id property="fbUid" column="FB_UID" />
+ 		<result property="interestCommunityNo" column="INTEREST_COMMUNITY_NO"/>
+ 		<result property="interestCommunityName" column="INTEREST_COMMUNITY_NAME"/>
+ 		<result property="count" column="Count(*)"/>
+ 	</resultMap>
+ 	
+ 	<select id="selectArticle" parameterType="map" resultMap="MypageCommunityResult">
+ 	    SELECT interest_community.INTEREST_COMMUNITY_NAME, interest_community.INTEREST_COMMUNITY_NO,
+		Count(*) AS count FROM interest_community INNER JOIN 
+		(members INNER JOIN mapping_info ON members.FB_UID = mapping_info.FB_UID) 
+		ON interest_community.INTEREST_COMMUNITY_NO = mapping_info.INTEREST_COMMUNITY_NO
+		group by interest_community_no
+ 	</select>
+ 	
+ 	<select id="selectArticlePirvate" parameterType="map" resultMap="MypageCommunityResult">
+ 	    SELECT interest_community.INTEREST_COMMUNITY_NAME, 
+ 	    interest_community.INTEREST_COMMUNITY_NO, members.FB_UID,
+		count(*) as count FROM interest_community INNER JOIN 
+		(members INNER JOIN mapping_info ON members.FB_UID = mapping_info.FB_UID) 
+		ON interest_community.INTEREST_COMMUNITY_NO = mapping_info.INTEREST_COMMUNITY_NO
+		where mapping_info.fb_uid=#{fb_uid} group by interest_community_no
+ 	</select>
+ 	
+    <select id="selectUserInfo" parameterType="String" resultMap="UserInfoResult" >
+       SELECT 
+		    members.FB_NAME,
+		    members.FB_PHOTO_PATH,
+		    members.AUTH,
+		    members.LEVEL,
+		    Sum(point_history.POINT) AS `POINT`,
+		    mapping_info.MI_NO
+		FROM
+		    (members
+		    LEFT JOIN mapping_info ON members.FB_UID = mapping_info.FB_UID)
+		        LEFT JOIN
+		    point_history ON members.FB_UID = point_history.FB_UID
+		    where members.FB_UID = #{fbUid}
+		    GROUP BY members.FB_NAME , members.FB_PHOTO_PATH , members.AUTH , members.LEVEL , mapping_info.MI_NO;
+	</select>
+    
+	<select id="selectTotalPoint" parameterType="String" resultMap="MappingGraph" >
+      	select point_date, sum(point), members.fb_uid 
+      	from members INNER JOIN point_history 
+		ON members.FB_UID = point_history.FB_UID  where left(point_date,7) 
+		and members.fb_uid=#{fb_uid} group by left(point_date,7) 
+		order by left(point_date,7) ASC
+    </select>
+    
+	<select id="selectMonthList" parameterType="map" resultMap="MypageContextList">
+		SELECT 
+		    mapping_info.MI_NO,
+		    members.FB_UID,
+		    members.FB_NAME,
+		    mapping_info.MI_TITLE,
+		    mapping_info.MI_DATE,
+		    mapping_info.ADDRESS,
+		    mapping_info.MI_CONTEXT,
+		    mapping_info.LAT,
+		    mapping_info.LNG,
+		    investi_item.INVESTI_ITEM_TYPE,
+		    investi_item.INVESTI_ITEM_NAME,
+		    ans_type_item.ANS_TYPE_ITEM_NAME,
+		    interest_community.INTEREST_COMMUNITY_NAME,
+		    general_board_file.PATH_NAME,
+		    general_board_file.FILE_MASK,
+		    Min(general_board_file.FILE_SEQ)
+		FROM
+		    (interest_community
+		    INNER JOIN ((investi_item
+		    INNER JOIN target_investi_item ON investi_item.INVESTI_ITEM_NO = target_investi_item.INVESTI_ITEM_NO)
+		    INNER JOIN ((members
+		    INNER JOIN mapping_info ON members.FB_UID = mapping_info.FB_UID)
+		    INNER JOIN (ans_type_item
+		    INNER JOIN investi_item_ans ON ans_type_item.ANS_TYPE_ITEM_NO = investi_item_ans.ANS_TYPE_ITEM_NO) ON mapping_info.MI_NO = investi_item_ans.MI_NO) ON (target_investi_item.INVESTI_ITEM_NO = investi_item_ans.INVESTI_ITEM_NO) AND (target_investi_item.INTEREST_COMMUNITY_NO = investi_item_ans.INTEREST_COMMUNITY_NO)) ON interest_community.INTEREST_COMMUNITY_NO = target_investi_item.INTEREST_COMMUNITY_NO)
+		        LEFT JOIN
+		    general_board_file ON mapping_info.MI_NO = general_board_file.GB_NO
+		WHERE
+		    ((members.FB_UID) = #{fbUid}) AND ((mapping_info.MI_DATE) Between #{startDate} And #{endDate})
+		GROUP BY mapping_info.MI_NO
+		ORDER BY mapping_info.MI_DATE DESC;
+	</select>
+	
+	<select id="selectDayList" parameterType="map" resultMap="MypageContextList">
+		SELECT 
+		    mapping_info.MI_NO,
+		    members.FB_UID,
+		    members.FB_NAME,
+		    mapping_info.MI_TITLE,
+		    mapping_info.MI_DATE,
+		    mapping_info.ADDRESS,
+		    mapping_info.LAT,
+		    mapping_info.LNG,
+		    mapping_info.MI_CONTEXT,
+		    investi_item.INVESTI_ITEM_TYPE,
+		    investi_item.INVESTI_ITEM_NAME,
+		    ans_type_item.ANS_TYPE_ITEM_NAME,
+		    interest_community.INTEREST_COMMUNITY_NO,
+		    interest_community.INTEREST_COMMUNITY_NAME,
+		    general_board_file.PATH_NAME,
+		    general_board_file.FILE_MASK,
+		    Min(general_board_file.FILE_SEQ)
+		FROM
+		    (interest_community
+		    INNER JOIN ((investi_item
+		    INNER JOIN target_investi_item ON investi_item.INVESTI_ITEM_NO = target_investi_item.INVESTI_ITEM_NO)
+		    INNER JOIN ((members
+		    INNER JOIN mapping_info ON members.FB_UID = mapping_info.FB_UID)
+		    INNER JOIN (ans_type_item
+		    INNER JOIN investi_item_ans ON ans_type_item.ANS_TYPE_ITEM_NO = investi_item_ans.ANS_TYPE_ITEM_NO) ON mapping_info.MI_NO = investi_item_ans.MI_NO) ON (target_investi_item.INVESTI_ITEM_NO = investi_item_ans.INVESTI_ITEM_NO) AND (target_investi_item.INTEREST_COMMUNITY_NO = investi_item_ans.INTEREST_COMMUNITY_NO)) ON interest_community.INTEREST_COMMUNITY_NO = target_investi_item.INTEREST_COMMUNITY_NO)
+		        INNER JOIN
+		    general_board_file ON mapping_info.MI_NO = general_board_file.GB_NO
+		WHERE
+		    (((members.FB_UID) = #{fbUid}) AND ((mapping_info.MI_DATE) Like #{date}))
+		GROUP BY mapping_info.MI_NO , general_board_file.PATH_NAME , general_board_file.FILE_MASK
+		ORDER BY mapping_info.MI_DATE;
+	</select>
+
+	<select id="selectMem" parameterType="string" resultMap="MypageMembersResult">
+		SELECT members.FB_UID, members.FB_NAME, members.FB_EMAIL,
+		members.FB_SEX, members.FB_PHOTO_PATH, members.AUTH, members.LEVEL,
+		point_history.POINT, point_history.POINT_DATE
+		FROM members LEFT JOIN point_history ON members.FB_UID =
+		point_history.FB_UID
+		WHERE (((members.FB_UID)=#{value}));
+
+	</select>
+	
+	<select id="selectRank" resultType = "map">
+		SELECT 
+		    fbUid, point, @rank:=@rank + 1 AS rank, fbName
+		FROM
+		    (SELECT 
+		        members.FB_UID AS fbUid,
+		        members.FB_NAME as fbName, 
+		        (IFNULL(Sum(point_history.POINT),0)) AS point
+		    FROM
+		        members
+		    INNER JOIN point_history ON members.FB_UID = point_history.FB_UID
+		    GROUP BY members.FB_UID
+		    ORDER BY (IFNULL(Sum(point_history.POINT),0)) DESC) P,
+		    (SELECT @rank:=0) R
+		ORDER BY rank ASC;
+	</select>
+
+</mapper>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.BoardDao">
+
+<!-- 	<cache /> -->
+
+	<select id="selectList" parameterType="int" resultType="GeneralBoard">
+		SELECT 
+		general_board.GB_NO as gbNo, 
+		GB_NAME as gbName, 
+		GB_TITLE as gbTitle,
+		GB_CONTEXT as gbContext, 
+		BOARD_TYPE_NO as boardTypeNo,
+		GB_GRP as gbGrp, 
+		GB_SEQ as gbSeq, 
+		GB_LVL as gbLvl, 
+		GB_DATE as gbDate,
+		FB_UID as fbUid, 
+		GB_NOTICE as gbNotice, 
+		GB_CLICK_COUNT as gbClickCount,
+		SQ.countAttach,
+		COUNT(GB_GRP) as countGRP
+		
+		FROM 
+		(SELECT
+		GB_NO,
+		COUNT(FILE_NAME) AS countAttach
+		FROM general_board_file
+		GROUP BY GB_NO)SQ RIGHT JOIN general_board ON SQ.GB_NO = general_board.GB_NO
+		
+		
+		WHERE BOARD_TYPE_NO=#{value}
+		GROUP BY GB_GRP 
+		ORDER BY GB_GRP DESC, GB_SEQ 
+				
+		
+		
+	</select>
+	
+
+	<insert id="insert" parameterType="GeneralBoard"
+		 	useGeneratedKeys="true" keyProperty="gbNo">
+		 	INSERT INTO general_board(
+				GB_NAME,
+				GB_TITLE,
+				GB_DATE,
+				GB_CONTEXT,
+				BOARD_TYPE_NO,
+				FB_UID,
+				GB_GRP,
+				GB_SEQ,
+				GB_LVL,
+				GB_NOTICE
+				)
+				
+				VALUES(
+				#{gbName},
+				#{gbTitle},
+				now(), 
+				#{gbContext},
+				#{boardTypeNo},
+				#{fbUid},
+				#{gbGrp},
+				#{gbSeq},
+				#{gbLvl},
+				#{gbNotice}
+				);
+		 	
+	</insert> 
+	
+	
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM general_board WHERE GB_NO=#{value}
+	</delete>
+	
+	<delete id="fileDelete" parameterType="GeneralBoardFile">
+		DELETE FROM general_board_file WHERE GB_NO=#{gbNo} AND FILE_MASK=#{fileMask}
+	</delete>
+	
+	<update id="update" parameterType="GeneralBoard">
+	UPDATE general_board SET
+			GB_NAME=#{gbName},
+			GB_TITLE= #{gbTitle},
+			GB_CONTEXT=#{gbContext},
+			GB_GRP=#{gbGrp},
+			GB_SEQ= #{gbSeq},
+			GB_LVL=#{gbLvl},
+			GB_DATE=now()
+		WHERE GB_NO=#{gbNo}
+	</update>
+	
+	<update id="updateReply"  parameterType="map" >
+		UPDATE general_board SET
+			GB_CONTEXT=#{gbContext},
+			GB_DATE=now()
+		WHERE GB_NO=#{gbNo}
+	</update>
+	
+	
+	<select id="selectGrp" resultType="GeneralBoard" parameterType="int">
+	SELECT 
+			GB_NO as gbNo,
+			GB_NAME as gbName,
+			GB_TITLE as gbTitle, 
+			GB_CONTEXT as gbContext,
+			GB_GRP as gbGrp,
+			GB_SEQ as gbSeq,
+			GB_LVL as gbLvl,
+			FB_UID as fbUid,
+			GB_NOTICE as gbNotice,
+			GB_DATE as gbDate,
+			GB_CLICK_COUNT as gbClickCount
+    FROM general_board 
+	WHERE GB_GRP=#{gbGrp}
+	ORDER BY GB_GRP DESC, GB_SEQ 
+	</select>
+	
+	<select id="getGrp" parameterType="int" resultType="int">
+		SELECT 
+			max(GB_GRP)
+		FROM general_board 
+	</select>
+	
+	<select id="getSeq" parameterType="int" resultType="int">
+		SELECT 
+			max(GB_SEQ)
+		FROM general_board 
+		WHERE GB_GRP=#{gbGrp}
+	</select>
+	
+	<update id="updateSeq" parameterType="map">
+	UPDATE general_board SET
+			GB_SEQ = (GB_SEQ+1)
+	WHERE GB_GRP = #{gbGrp} and GB_SEQ > #{gbSeq}
+	</update>
+	
+	<select id="selectSearch" parameterType="map" resultType="GeneralBoard">
+		SELECT 
+			GB_NO as gbNo,
+			GB_NAME as gbName,
+			GB_TITLE as gbTitle, 
+			GB_CONTEXT as gbContext,
+			GB_GRP as gbGrp,
+			GB_SEQ as gbSeq,
+			GB_LVL as gbLvl,
+			GB_NOTICE as gbNotice,
+			GB_DATE as gbDate,
+			GB_CLICK_COUNT as gbClickCount,
+            COUNT(GB_GRP) AS countGB_GRP
+		FROM general_board 
+		WHERE GB_LVL=0 
+		
+		<choose>
+			<when test='searchType != null and searchType=="gbtitle"'>
+			    <foreach collection="searchObjList" item="item" index="index">
+          			 <if test='index == 0'> and </if>
+			      	 <if test='index > 0'> or  </if>
+          			
+          			 (GB_TITLE LIKE '%${searchObjList[index]}%' 
+          			 or GB_CONTEXT LIKE '%${searchObjList[index]}%'
+          			 or GB_NAME LIKE '%${searchObjList[index]}%')
+        		</foreach>
+			</when>
+		</choose>
+		and BOARD_TYPE_NO = #{boardTypeNo}
+		GROUP BY GB_GRP
+		ORDER BY GB_GRP DESC, GB_SEQ 
+	</select>
+	
+	
+	<update id="increCount" parameterType="GeneralBoard">
+		UPDATE general_board SET
+			GB_CLICK_COUNT=(GB_CLICK_COUNT+ 1)
+		WHERE GB_GRP=#{gbGrp}
+	
+	</update>
+	
+	
+	<select id="deleteCheck" parameterType="map" resultType="int">
+		SELECT 
+			   count(GB_LVL)
+		FROM general_board 
+		WHERE GB_GRP= #{gbGrp} AND GB_SEQ= #{gbSeq}  AND GB_LVL = #{gbLvl} 
+	</select>
+	
+	<insert id="insertFile" parameterType="GeneralBoardFile">
+		INSERT INTO general_board_file(
+			GB_NO,
+			FILE_NAME,
+			FILE_MASK,
+			FILE_SIZE,
+			DOWNLOAD_COUNT,
+			FILEREGISTER_DATE)
+		VALUES(
+			#{gbNo},
+			#{fileName},
+			#{fileMask},
+			#{fileSize},
+			#{downloadCount},
+			now())
+	</insert> 
+	<select id="selectFileList" parameterType="int" resultType="GeneralBoardFile">
+		SELECT 
+			FILE_SEQ as fileSeq,
+			GB_NO as gbNo,
+			FILE_NAME as fileName,
+			FILE_MASK as fileMask,
+			FILE_SIZE as fileSize,
+			DOWNLOAD_COUNT as downloadCount
+		FROM general_board_file 
+		WHERE GB_NO=#{gbNo}
+	</select>
+	
+	<select id="getBoardPermissionLevel" parameterType="int" resultType="int">
+		SELECT 
+			BOARD_LEVEL as boardLevel
+		FROM board_type
+		WHERE BOARD_TYPE_NO=#{value}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+

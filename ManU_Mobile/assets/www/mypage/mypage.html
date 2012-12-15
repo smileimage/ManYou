@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
+<link rel="stylesheet" href="../css/ManU.min.css" />
+<link rel="stylesheet" href="../jquery/jquery.mobile.structure-1.1.0.css" />
+<link rel="stylesheet" href="../css/mypage.css" />
+<link rel="stylesheet" href="../css/south-street/jquery-ui-1.8.22.custom.css" />
+<link rel="stylesheet" href="../css/pajinate.css" />
+
+<script type="text/javascript" src="../jquery/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../jquery/jquery.pajinate.js"></script>
+<script type="text/javascript" src="../jquery/jquery.mobile-1.1.1.js"></script>
+<script type="text/javascript" src="../js/cordova-2.0.0.js"></script>
+<script type="text/javascript" src="../facebook/cdv-plugin-fb-connect.js"></script>
+<script type="text/javascript"src="../facebook/facebook_js_sdk.js"></script>
+<script type="text/javascript" src="../jquery/jquery-ui-1.8.21.custom.min.js"></script>
+<script type="text/javascript" src="../jquery/jquery.ui.core.js"></script>
+<script type="text/javascript" src="../facebook/cdv-plugin-fb-connect.js"></script>
+<script type="text/javascript" src="../facebook/facebook_js_sdk.js"></script>
+<script type="text/javascript" src="../js/facebookConn.js"></script>
+<script type="text/javascript" src="../facebook/facebook.js"></script>
+<script type="text/javascript" src="../js/config.js"></script>
+<script type="text/javascript" src="../js/util.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/investiItemArr.js"></script>
+<script type="text/javascript" src="mypage.js"></script>
+<script type="text/javascript" src="../jquery/jquery.mobile.listview.accordion.js"></script>
+
+
+<meta charset="UTF-8">
+</head>
+<body>
+<div id="mypage" data-role="page" data-cache='never'>
+		<div data-role="header" id="header" data-position="fixed">
+			 <a href="javascript:moveToPage('../index.html')" class="ui-btn-left" data-role="button"
+				data-inline ="true" data-icon="home">HOME</a>
+			<h1>My Page</h1>
+
+			<div class="ui-btn-right">
+				<div id="show_when_not_connected">
+					<a class="loginBtn" id="loginBtn_mypage"> <span>Login</span></a>
+				</div>
+
+				<div id="show_when_connected">
+					<a href="javascript:moveToPage('../registerForm/registerForm.html')" data-icon="plus" data-role="button">New</a>
+				</div>
+			</div>
+		</div>
+		<div data-role="content">
+			<div id="action">
+				<div id="loading-icon"></div>
+				<div id="msg"></div>
+			</div>
+
+			<div id="show_when_connected">
+				<div id="userInfo"></div>
+				<div id="userRank">
+					<ul id="userRankList" data-role="listview">
+					</ul>
+				</div>
+				<div id="mappingInfoList" class="container">
+				<ul id='mappingInfoListTitle2' class="alt_content" data-role="listview">
+				<li id="mappingInfoListTitle">▼회원님이 작성한 글 목록입니다▼</li></ul>
+				
+					<div class="alt_page_navigation"></div>
+					
+					<ul id='mappingListView' class="alt_content" data-role="listview"></ul>
+				</div>
+<!-- 					<div data-role="button" id="moreBtn">더보기</div> -->
+<!-- 					<div data-role="button" id="hideBtn">숨기기</div> -->
+<!-- 				<div data-role="button" id="logoutBtn_mypage">Logout</div> -->
+			</div>
+		</div>
+
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<div id="show_when_connected">
+					<ul>
+						<li><a href="javascript:moveToPage('../community/community.html')">About us!</a></li>
+						<li><a href="javascript:moveToPage('../board/board.html')">Board</a></li>
+						<li><a href="javascript:logout()">LogOut</a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

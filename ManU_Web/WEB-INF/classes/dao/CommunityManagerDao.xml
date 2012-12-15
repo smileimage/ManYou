@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.CommunityManagerDao">
+	<!--<cache></cache> -->
+
+	<resultMap id="MainContextList" type="MainContextList">
+		<id property="miNo" column="MI_NO" />
+		<result property="fbName" column="FB_NAME" />
+		<result property="fbUid" column="FB_UID" />
+		<result property="address" column="ADDRESS" />
+		<result property="miTitle" column="MI_TITLE" />
+		<result property="miContext" column="MI_CONTEXT" />
+		<result property="miDate" column="MI_DATE" />
+		<result property="pathName" column="PATH_NAME" />
+		<result property="fileMask" column="FILE_MASK" />
+		<result property="fileSeq" column="Min(general_board_file.FILE_SEQ)" />
+		<result property="investiItemName" column="INVESTI_ITEM_NAME" />
+		<result property="investiItemType" column="INVESTI_ITEM_TYPE" />
+		<result property="ansTypeItemName" column="ANS_TYPE_ITEM_NAME" />
+		<result property="interestCommunityName" column="INTEREST_COMMUNITY_NAME" />
+	</resultMap>
+
+	
+	<select id="communityMappingInfoList" parameterType="map"
+		resultMap="MainContextList">
+		SELECT
+		mapping_info.MI_NO,
+		interest_community.INTEREST_COMMUNITY_NAME,
+		members.FB_NAME,
+		members.FB_UID,
+		mapping_info.MI_TITLE,
+		investi_item.INVESTI_ITEM_TYPE,
+		investi_item.INVESTI_ITEM_NAME,
+		ans_type_item.ANS_TYPE_ITEM_NAME,
+		general_board_file.PATH_NAME,
+      	general_board_file.FILE_MASK,
+      	Min(general_board_file.FILE_SEQ),
+		mapping_info.MI_DATE,
+		mapping_info.ADDRESS,
+		mapping_info.MI_CONTEXT
+		FROM
+		interest_community
+		INNER JOIN ((investi_item INNER JOIN target_investi_item ON
+		investi_item.INVESTI_ITEM_NO = target_investi_item.INVESTI_ITEM_NO)
+		INNER JOIN (((members INNER JOIN mapping_info ON members.FB_UID =
+		mapping_info.FB_UID)
+		INNER JOIN (ans_type_item INNER JOIN
+		investi_item_ans ON
+		ans_type_item.ANS_TYPE_ITEM_NO =
+		investi_item_ans.ANS_TYPE_ITEM_NO) ON
+		mapping_info.MI_NO =
+		investi_item_ans.MI_NO)
+		LEFT JOIN general_board_file ON mapping_info.MI_NO =
+		general_board_file.GB_NO) ON
+		(target_investi_item.INTEREST_COMMUNITY_NO =
+		investi_item_ans.INTEREST_COMMUNITY_NO)
+		AND
+		(target_investi_item.INVESTI_ITEM_NO =
+		investi_item_ans.INVESTI_ITEM_NO)) ON
+		interest_community.INTEREST_COMMUNITY_NO =
+		target_investi_item.INTEREST_COMMUNITY_NO
+		WHERE interest_community.INTEREST_COMMUNITY_NO = #{interestCommunityNo}
+		Group BY mapping_info.MI_NO 
+		ORDER BY mapping_info.MI_NO
+		DESC
+	</select>
+	
+	
+	<resultMap id="communityMember" type="Members">
+		<id property="fbUid" column="FB_UID" />
+		<result property="fbUid" column="FB_UID" />
+		<result property="fbName" column="FB_NAME" />
+		<result property="fbEmail" column="FB_EMAIL" />
+		<result property="fbSex" column="FB_SEX" />
+		<result property="fbPhotoPath" column="FB_PHOTO_PATH" />
+		<result property="auth" column="AUTH" />
+		<result property="level" column="LEVEL" />
+		<result property="signUpDate" column="MI_DATE" />
+		<result property="count" column="COUNT" />
+	</resultMap>
+	<select id="communityMemberList" parameterType="int"
+	resultMap="communityMember">
+	SELECT 
+		members.FB_UID,
+		members.FB_EMAIL, 
+		members.FB_NAME, 
+		members.FB_SEX,
+		members.AUTH,
+		Min(mapping_info.MI_DATE) AS MI_DATE, 
+		Count(mapping_info.MI_NO) AS COUNT
+	FROM 
+		members INNER JOIN mapping_info ON members.FB_UID = mapping_info.FB_UID
+	WHERE 
+		(((mapping_info.INTEREST_COMMUNITY_NO)=#{interestCommunityNo}))
+	GROUP BY 
+		members.FB_EMAIL, members.FB_NAME, members.FB_SEX;
+
+	</select>
+
+
+	<delete id="deleteMappingInfo" parameterType="int">
+		delete from
+		mapping_info where MI_NO = #{miNo}
+	</delete>
+
+	<delete id="deleteInvestiItemAnsWithMapping" parameterType="int">
+		delete from investi_item_ans where MI_NO = #{miNo}
+	</delete>
+
+	<delete id="deleteReplyWithMapping" parameterType="int">
+		delete from
+		reply where MI_NO = #{miNo}
+	</delete>
+
+	<delete id="deletePhotosWithMapping" parameterType="int">
+		delete from
+		general_board_file where GB_NO = #{miNo} and TABLE_NAME='mappingInfo'
+	</delete>
+
+	<delete id="deleteGoodWithMapping" parameterType="int">
+		delete from
+		good where MI_NO = #{miNo}
+	</delete>
+	
+	<delete id="deletePointWithMapping" parameterType="map">
+		delete p from point_history as p INNER JOIN ( 
+		select Max(POINT_NO) as no FROM point_history where FB_UID=#{fbUid} and point=10 and POINT_DATE LIKE #{date} ) as r 
+		on p.POINT_NO = r.no;
+	</delete>
+	
+	<resultMap id="memberDeleteRequest" type="MemberDeleteRequest">
+		<id property="mdrNo" column="MDR_NO" />
+		<result property="mdrNo" column="MDR_NO" />
+		<result property="mdrDate" column="MDR_DATE" />
+		<result property="mdrReason" column="MDR_REASON" />
+		<result property="fbUid" column="FB_UID" />
+		<result property="sender" column="SENDER" />
+	</resultMap>
+
+	<insert id="communityMemberDeleteList" parameterType="MemberDeleteRequest">
+		insert into 
+			member_delete_request(MDR_DATE,MDR_REASON,FB_UID,SENDER)		
+		VALUES(now(),#{mdrReason},#{fbUid},#{sender})
+	</insert>
+
+
+</mapper>

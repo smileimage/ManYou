@@ -1,0 +1,84 @@
+#onelineBoard{
+	width : 330px;
+	float: left;
+	margin : 5px;
+/* 	height : 600px; */
+}
+
+#OneLineUl{
+	border : solid 1px;
+	margin-top: 10px;
+	padding: 1%;
+	border-radius: 7px;
+}
+
+#OneLineUl .oneLineLi{
+	color: maroon;
+	font-weight: bold;
+}
+
+#investiAnsItemType{
+	float: left;
+}
+
+#BtnForm{
+        clear : both;
+        float : right;
+}
+
+/*****************************한줄게시판*****************************/
+#deleteImg{
+	width : 12px;
+	height : 12px;
+	margin-left : 300px;
+	margin-top : 2px;
+	position : absolute;
+}
+#updateImg{
+	width : 15px;
+	height : 15px;
+	margin-left : 280px;
+	position : absolute;
+}
+#obContextBox{
+	resize: initial;
+	width: 85%;
+}
+#updateImg2{
+	width: 13px;
+	height: 13px;
+	position: relative;
+	right: 0%;
+	margin-top: 25px;
+	float: right;
+}
+
+#communityBtn{
+	padding-left: 37%;
+}
+
+.cancelUpdate{
+	position: relative;
+	float: right;
+	margin-top: 14%;
+	font-size: 13px;
+	color: red;
+	left: 4%;
+}
+#insertOneLine{
+	width:250px;
+	resize: initial;
+}
+
+#oneLineBtn{
+	clear:both;
+	float:left;
+}
+
+#insertBtn{
+	position: relative;
+	float: right;
+	margin: 0;
+}
+
+

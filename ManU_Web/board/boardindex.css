@@ -1,0 +1,646 @@
+@CHARSET "UTF-8";
+
+.button {
+ 
+ /*basic styles*/
+ width: 250px;  height: 50px;  color: white; background-color: #99CF00;
+ text-align: center;  font-size: 30px;  line-height: 50px;
+ 	cursor: pointer;
+ 
+ 
+ /*gradient styles*/
+ background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#99CF00), to(#6DB700));
+ background: -moz-linear-gradient(19% 75% 90deg,#6DB700, #99CF00);
+ 
+ /*border styles*/
+ border-left: solid 1px #c3f83a;
+ border-top: solid 1px #c3f83a;
+ border-right: solid 1px #82a528;
+ border-bottom: solid 1px #58701b;
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ border-radius: 10px;
+ -webkit-gradient(linear, 0% 0%, 0% 100%, from(#99CF00), to(#6DB700))
+ 
+}
+ 
+.button h3 {
+ font-size: 20px;
+ line-height: 35px;
+ font-family: helvetica, sans-serif;
+}
+ 
+.button p {
+ font-size: 12px;
+ line-height: 14px;
+ font-family: helvetica, sans-serif;
+}
+
+.button_small {
+ font-size: 12px;
+ line-height: 14px;
+ font-family: helvetica, sans-serif;
+ border-radius: 5px;
+}
+ 
+ 
+ul .button {
+ font-size: 13px;
+ border-radius: 3px;
+ line-height: 20px;
+ font-family: helvetica, sans-serif;
+}
+ 
+
+ 
+ #paging_container{
+ height : 500px;
+ }
+a {
+ text-decoration: none;
+ color: fff;
+}
+ 
+.button:hover {
+ background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#6DB700), to(#99CF00));
+ background: -moz-linear-gradient(19% 75% 90deg,#99CF00, #6DB700);
+}
+
+
+#fileList .button {
+font-size: 12px;
+border-radius: 3px;
+line-height: 20px;
+padding : 5px;
+font-family: helvetica, sans-serif;
+}
+
+/*--------------pop Layer------------------*/
+ ul#uploader{
+ display: inline;
+ }
+ 
+#uploader div{
+  display: inline;
+ }
+#uploader li{
+	display : block;
+}
+
+
+
+ ul#edituploader{
+ display: inline;
+ }
+ 
+#edituploader div{
+  display: inline;
+ }
+#edituploader li{
+	display : block;
+}
+
+
+
+#uploader input{
+	margin : 3px 3px;
+}
+
+/*--------------End pop Layer------------------*/
+#boardList{
+	height: 30px;
+	position: relative;
+	left: 45px;
+}
+#boardList ul li{
+	float:left;
+	margin:10px 10px;
+	display:block;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+/* -------button End --------- *
+
+h1 {
+	font-size: 150%;
+	border-left: 5px solid black;
+	border-bottom: 1px solid black;
+	padding: 0 10px;
+}
+
+/* input{ */
+/* 	height : 15px; */
+/* } */
+
+ul {
+	padding: 0;
+	margin : 1px 0 0 0;
+	list-li : none;
+}
+
+li {
+	margin : 0 0 0 5px;
+/* 	padding : 0 8px 0 8px; */
+	display:inline;
+}
+
+
+.listUL{
+	border-top:1px dotted gray;
+	position : relative;
+	height : 20px;
+	vertical-align : middle;
+	padding : 7px 0 0 0 ;
+}
+
+
+.listNo{
+	float : left;
+		width : 5%;
+
+}
+
+
+.listTitle{
+	float : left;
+/* 	margin : 0 0 0 10px; */
+width : 62%;
+}
+
+.listName{
+	float : left;
+	width : 15%;
+	font-size : 12px;
+	color: mediumBlue;
+	font-family: sans-serif;
+	margin : 0 0px 0 0;
+	
+}
+
+.listDate{
+	float : left;
+	width : 10%;
+}
+
+.viewCount{
+		float : left;
+			width : 5%;
+	   align :center;
+}
+
+#listRowTitle{
+	height : 20px;
+	vertical-align : middle;
+	padding : 7px 0 0 0 ;
+	
+}
+.listcount{
+	font-size: 14px;
+ 	font: bold; color: red;
+	
+}
+
+
+div #scrollList ,div #scrollHeader  {
+/* 	border: 1px solid black; */
+	width: 100%;
+	height : auto;
+	overflow : auto;
+	margin: 0px 10px;
+}
+
+div#main{
+/* 	background-color: #e6e6fa; */
+	width: 100%;
+	height : 620px;
+	padding: 5px 5px;
+/* 	margin-left: 133px; */
+/* 	position :absolute; */
+/* 	margin : 10px 10px; */
+}
+div#list {
+	border: 1px solid gray;
+	margin: 0 auto;
+	padding: 0 10px;
+	width: 88%;
+	margin : 10px 0 0 5px; 
+	position :absolute;
+	z-index: 2;
+}
+
+div#pageView{
+	background: #ffffff  0px 0px repeat;
+	border : 1px solid gray;
+	margin: 60px 0 0 10px;
+	width: 74%;
+	height : 550px;
+	padding: 0 10px;
+	
+	position: absolute;
+	z-index: 5;
+}
+
+div#pageDetail{
+	background: #ffffff  0px 0px repeat;
+	border : 1px solid gray;
+	margin: 60px 0 0 15px;
+	width: 540px;
+	padding: 0 10px;
+	position: absolute;
+	z-index: 16;
+}
+
+div#msgbox{
+	border : 1px solid gray;
+	width : 300px;
+	height : 150px;
+	font-size: 14px;
+	color : gray;
+	font :bold;
+	z-index: 21;
+	position: absolute;
+	margin : 100px 0 0 130px; 
+	background-color: #FFFFFF;
+	
+}
+
+label.error { 
+	float: none; 
+	font-size : 10px;
+	color: red; 
+	padding-left: 10px; 
+	vertical-align: middle; }
+
+/* -----------------------검색 --------------------------------- */
+#footer{
+	display : inline;
+
+}
+
+
+#footer #conbtn{
+	margin : 10px 10px;
+	width :120px;
+	float : left;
+	
+}
+
+#footer #searchform{
+	
+	margin : 10px 10px 10px 40px ;
+	float : left;
+}
+
+#namesearch {
+/* 	background: #ffffff url('../images/search_s.jpg') 0px 0px no-repeat;  */
+	height : 20px;
+	font-size : 15px;
+	margin-left: 100px;
+	padding: 0 92px 0 32px; 
+	width : 100px;
+	font:  bold 100% sans-serif;
+}
+
+#searchtext{
+	margin: 0 0 0 5px;
+	font-size : 10px;
+    text-align: right ;
+/* 	display : inline; */
+}
+
+
+#layer1{
+/* 			border : 1px solid blue; */
+	
+	width : 80px;
+	position : absolute;
+	z-index : 11;
+	padding : 10px 0 0 0;
+	margin : -4px 0 0 240px;
+}
+
+.layer2{
+	width : 30px;
+	position : absolute;
+	z-index : 16;
+	margin : 2px 0 0 102px;
+}
+
+
+#cenclesmallbtn{
+	float:  right;
+}
+
+
+/* -----------------------검색 끝 --------------------------------- */
+
+
+
+.firstLine{
+	border : 1px solid cornflowerblue;
+	height : auto;
+	
+}
+
+#txtLabel{
+	margin : 70px 0 0 80px; 
+}
+
+
+
+#grp_view,#lvl_view,#seq_view{
+/* 	width : 20px; */
+/* 	display: inline; */
+}
+#replyList{
+	display : inline;
+	margin : 10px 10px;
+}
+
+#replyList .gbName_view{
+	width :auto;
+	border : 0px;
+	font-size: 13px;
+	font-family:  sans-serif  cursive;
+	float: left;
+}
+#replyList .writedate_view{
+	border : 0px;
+	font-size: 10px;
+	color : gray;
+	font-family:  serif ;
+	margin-top: 4px;
+	float: left;
+}
+#replyList .title_view{
+	
+	border : 0px;
+	font-size: 15px;
+	font-family:monospace;
+	border-bottom:1px dotted gray;
+	color : darkblue;
+	width : 430px;
+	float : left;
+}
+
+.detailcount{
+	border-bottom:1px dotted gray;
+	margin-top : 2px;
+	width: 90px;
+	float : left;
+}
+
+#replyList .firstLine .gbContext_viewLi{
+	display : block;
+	min-height : 180px;
+	width : 98%;
+} 
+#replyList .gbContext_view {
+	display : block;
+	min-height: 50px;
+	border : 0px;
+	border-top:1px dotted gray;
+	font-size: 13px;
+}
+
+#replyList .gbContext_viewLi {
+	display : block;
+	min-height: 50px;
+	border : 0px;
+	border-top:1px dotted gray;
+	font-size: 13px;
+}
+
+
+
+.borderRead{
+	border : 1px solid red;
+	
+}
+
+#replyEditbox #gbContext_reply{
+	background-color: #F5F5DC;
+/* 	margin : 0 0 0 10px; */
+/* 	width : 450px; */
+	height : 50px;
+}
+
+#gbName_reply{
+	min-width : 50px;
+	border : 0px;
+}
+
+div #basic {
+/* 	border : 1px solid red; */
+	display : inline;
+	
+}
+
+div .cleditorMain {
+	margin : 0 0 0 5px;
+}
+
+#basic input  {
+	margin: 5px 5px;
+	background: url(images/iconArticle.gif) 0 0 no-repeat;
+	padding-left: 20px;
+}
+
+/* div { */
+/* 	margin : 10px 10px; */
+/* } */
+
+
+#basic div {
+/* 	margin : 0 0 0 0; */
+}
+
+
+#replyList .replylevel1 textarea {
+	width: 99%;
+	min-height: 50px;
+	border : 0px;
+	font-size: 13px;
+	background-color: orange;
+}
+
+#replyList .replylevel2 textarea {
+	width: 99%;
+	min-height: 50px;
+	border : 0px;
+	font-size: 13px;
+	background-color: orange;
+}
+
+.replylevel1{
+	padding-left: 40px;
+	background: url("images/replyicon.png")  3px 0px no-repeat;
+}
+
+.replylevel2{
+	padding-left: 40px;
+	margin-left: 20px;
+	background: url("images/replyicon.png")  3px 0px no-repeat;
+}
+
+
+.replyAction{
+/* 	background: url("images/iconReply.gif")  3px 0px no-repeat; */
+}
+
+.editGrp{
+	margin : 0;
+	float :left;
+/* 	margin-left: 190px; */
+}
+
+.hidden{
+	display: none;
+}
+
+label {
+	width: 80px;
+	text-align: right;
+	margin: 0px 7px 0 0;
+	text-size:80%;
+}
+
+.imgHide{
+	display:none;
+}
+
+#register #gbName {
+	margin:20px 0 10px 10px;
+	border : 0px;
+}
+#gbTitle {
+	margin:0 0 10px 10px;
+	width: 90%;
+	height : 20px;
+	background-color: #D7DFE7;
+	font-size: 13px;
+}
+#register #tag {
+	margin:0 0 10px 10px;
+		width:93%;
+		background: url(images/tag.png) 0 0 no-repeat;
+		padding-left : 20px;
+		border : 0px;
+		line-height: 15px;
+}
+
+#register textarea {
+	height:330px;
+/* 	margin:0 40px 10px 10px; */
+	width:480px;
+	
+}
+
+#replyList textarea{
+	width:500px;
+	height : auto;
+	margin:0 0 5px 0px;
+}
+
+
+#basic span {
+	margin:10px 10px ;
+}
+
+#conbtn{
+	margin : 10px;
+	position: static;
+	
+}
+
+.createDiv img{
+	width:20px;
+	margin: 5px 0 0 5px;
+	align:bottom;
+}
+
+
+#hr{
+	border-top: 2px dotted gray;
+	width : 250px;
+	height : 5px;
+}
+
+#listRowTitle{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 12px;
+}
+
+/* ------------------pajinate----------------- */
+.page_navigation , .alt_page_navigation{
+	padding-bottom: 20px;
+	margin : 10px 10px;
+}
+
+.page_navigation a, .alt_page_navigation a{
+	padding:3px 5px;
+	margin:2px;
+	color:white;
+	text-decoration:none;
+	float: left;
+	font-family: Tahoma;
+	font-size: 12px;
+	background-color:#DB5C04;
+}
+.active_page{
+	background-color:white !important;
+	color:black !important;
+}	
+/* ------------------pajinate----------------- */
+
+/*--------------------파일 첨부 -----------------*/
+
+.fileList input{
+	width : 400px;
+	float : left ;
+	margin-left : 30px;
+}
+
+.fileList img{
+	margin : 0px 10px ;
+	cursor: pointer;
+}
+/*--------------------파일 첨부 -----------------*/
+
+
+#fileList li {
+	display : block;
+/* 	background: url(images/tag.png) 0 0 no-repeat; */
+	background: url(images/iconArticle.gif) 0 5px  no-repeat;
+	padding : 0 0 2px 15px;
+}
+
+
+#attachment {
+	float : right;
+	margin-right: 20px;
+}
+
+#replyList #fileListDiv{
+	z-index: 99;
+	position: absolute;
+	left: 68%;
+	top: 80px;
+	background-color: #FFC;
+	width: 155px;
+	min-height: 175px;
+	border : 1px solid gray;
+	padding : 5px;
+	font-size : 12px;
+	line-height: 20px;
+}
+
+.fileDelBtn{
+	cursor: pointer;
+	width: 15px;
+	margin: 0 0 0 5px;
+}
+
+.blankbox {
+margin-left: 5px;
+}

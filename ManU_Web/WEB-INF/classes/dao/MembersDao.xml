@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.MembersDao">
+    <insert id="insert" parameterType="Members"
+        useGeneratedKeys="true" keyProperty="fb_uid">
+        insert into members(FB_EMAIL,FB_NAME,FB_SEX,FB_UID,FB_PHOTO_PATH,AUTH,LEVEl)
+        values(#{fb_email},#{fb_name},#{fb_sex},#{fb_uid},#{fb_photo_path}, #{auth}, #{level})
+    </insert>
+    
+    <select id="membersList" resultType="Members" parameterType="map">
+    	select 
+    		FB_EMAIL as fbEmail, 
+    		FB_NAME as fbName, 
+    		FB_SEX as fbSex, 
+    		FB_UID as fbUid, 
+    		FB_PHOTO_PATH as fbPhotoPath, 
+    		AUTH, LEVEL
+    	 from members
+    	 order by FB_NAME
+		 limit #{pageStartIndex}, #{pageSize}
+    	 <if test="auth != null">
+    		 WHERE AUTH=#{auth};
+    	 </if>
+    </select>
+        
+    <select id="membersAuthSearch" parameterType="String" resultType="Members">
+        select 
+    		FB_EMAIL as fbEmail, 
+    		FB_NAME as fbName, 
+    		FB_SEX as fbSex, 
+    		FB_UID as fbUid, 
+    		FB_PHOTO_PATH as fbPhotoPath, 
+    		AUTH, LEVEL
+    	 from members
+    	 WHERE AUTH=#{auth};
+    </select>
+    
+    <select id="membersDeleteList" resultType="MemberDeleteRequest">
+    	SELECT 
+			members.FB_EMAIL, 
+			members.FB_UID,
+			members.FB_NAME, 
+			interest_community.INTEREST_COMMUNITY_NAME, 
+			member_delete_request.MDR_DATE, 
+			member_delete_request.MDR_REASON
+		FROM (member_delete_request 
+		INNER JOIN interest_community 
+			ON member_delete_request.SENDER = interest_community.OWNER_UID) 
+		INNER JOIN members 
+			ON member_delete_request.FB_UID = members.FB_UID
+		ORDER BY member_delete_request.MDR_DATE DESC;
+    </select>
+    
+    <update id="memberDelete" parameterType="map">
+    	UPDATE 
+    		members 
+    	SET members.AUTH = #{auth}
+		WHERE (((members.FB_UID) = #{fbUid}));
+
+<!-- 		UPDATE  -->
+<!--     		member_delete_request  -->
+<!--     	INNER JOIN members  -->
+<!--     	ON member_delete_request.FB_UID = members.FB_UID  -->
+<!--     	SET member_delete_request.MDR_RESULT = 1, members.AUTH = "불량" -->
+<!-- 		WHERE (((members.FB_UID)=#{value})); -->
+    </update>
+    
+    <update id="memberAuthUpdate" parameterType="Members">
+    	UPDATE 
+    		members
+    	SET members.AUTH = #{auth}
+		WHERE members.FB_UID = #{fbUid}
+    </update>
+
+	<select id="getNameSearch" resultType="hashmap" parameterType="String">
+		select 
+			members.FB_NAME
+		from 
+			members
+		where 
+			members.FB_NAME_CHO LIKE '%${value}%'
+	</select>
+	
+<!--     커뮤니티 회원리스트 부르는 쿼리 -->
+<!--     SELECT interest_community.INTEREST_COMMUNITY_NAME, members.FB_NAME, members.FB_EMAIL, Min(mapping_info.MI_DATE) AS MI_DATE의최소값 -->
+<!-- FROM members RIGHT JOIN (mapping_info RIGHT JOIN interest_community ON mapping_info.INTEREST_COMMUNITY_NO = interest_community.INTEREST_COMMUNITY_NO) ON members.FB_UID = mapping_info.FB_UID -->
+<!-- GROUP BY interest_community.INTEREST_COMMUNITY_NAME, members.FB_NAME, members.FB_EMAIL, mapping_info.INTEREST_COMMUNITY_NO -->
+<!-- HAVING ((Not (members.FB_NAME) Is Null)); -->
+</mapper>

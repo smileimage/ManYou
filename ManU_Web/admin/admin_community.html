@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="admin_community.css">
+<script type="text/javascript src=admin_community.js"></script>
+</head>
+<body>
+	<div id="header"></div>
+
+	<select id="selectbox" name="selectbox" setImage="../images/arrow.gif">
+		<option value='main'>메인</option>
+		<option value='community' selected='selected'>커뮤니티</option>
+		<option value='user'>유저</option>
+		<option value='board'>게시판</option>
+	</select>
+	
+	<input type="button" id="btn_createComm" value=" 커뮤니티 생성"> <br>
+	<input type="button" id="btn_expotExcel" value="엑셀출력"> 
+	<input type="button" id="btn_exportKML" value="KML출력"> 
+
+	<div id="commList" name="commList">
+		<table id="commTable" name="commTable">
+			<tr>
+				<th id='commList_name'>커뮤니티명</th>
+				<th id='commList_area'>활동분야</th>
+				<th id='commList_num'>회원수</th>
+				<th id='commList_date'>생성일</th>
+				<th id='commList_select'>선택</th>
+			</tr>
+		</table>
+		<div id="pageControlBar">
+			<input type="button" id="prevPage" value="이전"> 
+			<input type="button" id="nextPage" value="다음">
+		</div>
+	</div>
+
+
+</body>
+</html>

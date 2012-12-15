@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+.toggler {
+	width: 500px;
+	height: 200px;
+	position: relative;
+	border: 1px solid black;
+}
+
+#effect {
+	width: 20px;
+	height: 50px;
+	padding: 0.4em;
+	position: relative;
+	float: right;
+	z-index: 2;
+	margin-top: 3%;
+}
+
+.redefinedUiCss {
+	border: 1px solid #dfd9c3;
+	background: #cdcdcd
+		url(images/ui-bg_highlight-hard_100_cdcdcd_1x100.png) 50% top repeat-x;
+	color: #312e25;
+}
+
+.geoHide {
+	display: none;
+}

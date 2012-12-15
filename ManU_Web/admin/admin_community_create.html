@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>관리자 화면 지도 추가 </title>
+<link rel="stylesheet" href="admin_community_create.css">
+<script type="text/javascript" src="../js/plugin/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../js/util.js"></script>
+<script type="text/javascript" src='create_geocode.js'></script>
+<script type="text/javascript" src='admin_community_create.js'></script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+</head>
+<body>
+<div id="comm_create">
+	<div id="header"></div>
+	<select id="selectbox" name="selectbox" setImage="../img/arrow.gif">
+		<option value='main'>메인</option>
+		<option value='community' selected='selected'>커뮤니티</option>
+		<option value='user'>유저</option>
+		<option value='board'>게시판</option>
+	</select>	
+	
+	<div id="map_canvas"></div>
+	<div >
+	<h3>관심 커뮤니티 목록</h3>
+	<table id="communityList">
+		<tr class="headerTR">
+			<th>번 호</th>
+			<th>관심 커뮤니티명</th>
+			<th>관심 지역 </th>
+			<th>관심 분야 </th>
+			<th>정보 이용대상자</th> 
+			<th>방장명</th>
+			<th class="hidden">커뮤니티설명 </th>
+			<th>개설일</th>
+			
+		</tr>
+	</table>
+	</div>
+	
+	
+	
+     
+     
+     
+     <br>
+	<table id="investiItemListTable">
+	<tr id="investiItem" >
+		<td>
+		<h3 id="communiName">관심 커뮤니티명</h3>
+		<h5 id="communiContent">Text</h5>
+		</td>
+	</tr>
+		<tr ><td colspan="4">
+		<div id="investiDiv" class="hidden" >
+						<table>
+							<tr>
+								<td><select name="investiItemList" size="10"
+									id="investiItemList" >
+								</select></td><td>
+								<ul class="ansType">
+								
+								<li><input type="text"  id='investiItemNo' name='investiItemNo' class="hidden"></li>
+								<li><input type="text"  id='investiItemType' name='investiItemType' placeholder="조사항목 구분"></li>
+								<li><input type="text"  id='investiItemName' name='investiItemName' placeholder="조사항목명"></li>
+								
+								<li><select id='ansTypeNo'  name='ansTypeNo' ></select></li>
+								<li>	<input type="button" id="NewBtn" value="신규" /> 
+								<input type="button" id="addInvestiItemBtn" value="입력" /> 
+								<input type="button" id="modifyInvestiItemBtn" value="수정" />
+								<input type="button" id="deleteInvestiItemBtn" value="삭제" /></li>
+								</ul>	
+									</td>
+							</tr>
+						</table>
+					</div>
+
+				</td></tr>
+        <tr>
+            <th class="investiItemType">분류</th>
+            <th class="investiItemName">조사항목</th>
+            <th class="ansItemName">답변Type</th>
+            <th ><input type="button" id="targetInvestiDelBtn" value="삭제"></th>
+        </tr>
+        
+	</table>
+   
+    
+	<form id='map_options' name='map_options'  method="post"  >
+		<ul id ="mapUl" class="hidden">
+			<li><input type="text"  id='interestCommunityNo' name='interestCommunityNo'  class="hidden"></li>
+			<li><input type="text"  id='interestCommunityName' name='interestCommunityName' placeholder="커뮤니티명을 입력하세요 "></li>
+			<li><input type="text" id='address' name='address'  "><input type="button" id="addressBtn" value="주소" /></li>
+			<li><input type="text" id='interestArea' name='interestArea'  placeholder="주 소 입력하세요 "></li>
+			<li><input type="text" id='interestDomain' name='interestDomain' placeholder="관심분야 입력하세요 "></li>
+			<li><input type="text" id='ownerUid'  name='ownerUid'  placeholder="방장명 입력하세요 "></li>
+			<li class="hidden"><label for='location_lat'>위도 :</label><input type="text" id='location_lat'  readOnly ></li>
+			<li class="hidden"><label for='location_lng'>경도 :</label><input type="text" id='location_lng'  readOnly ></li>
+			
+			<li><select id='targetPeopleNo' class="selectbox" name='targetPeopleNo' placeholder="정보이용 대상">
+				</select>
+			</li>
+			<li><textarea id='interestCommunityContent' name='interestCommunityContent'' placeholder="커뮤니티 설명"></textarea></li>
+			<li><label for='mapOp'>지도 옵션</label>
+			<input type='radio' id='mapOp' name="mapOp" value='1' checked>지도
+			<input type='radio' id='mapOp' name="mapOp" value='2'>위성지도</li>
+			<li><div id="conbtn">
+					<input type="button" id="addBtn" value="입력">
+					<input type="button" id="modifyBtn" value="수정" class="hidden">
+					<input type="button" id="cancleBtn" value="취소">
+				</div>
+			</li>
+		</ul>
+	</form>
+
+</div>
+</body>
+
+
+</html>
+
+

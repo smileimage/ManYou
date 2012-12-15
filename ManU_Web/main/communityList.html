@@ -1,0 +1,72 @@
+<style>
+.commListTableCSS{
+ 	margin: 0 auto;
+ 	width: 100%; 
+	border-collapse: collapse;
+	background:#E2F2D3;
+	border:1px solid #33904E;
+	text-align: center;
+}
+.commListTableCSS th {
+	background:#8FC147;
+	color:#fff; 
+}
+.commListTableCSS tr{
+	height: 45px;
+}
+</style>
+
+<script>
+$(document).ready(function(e) {
+	createCommunityList();
+});
+
+function createCommunityList(){
+	
+	$.ajax({
+		url: '../communityListView.do',
+		dataType: 'json',
+		success: function(data, textStatus, jqXHR) {
+			if(data.status == 200) {
+				for( var i = 0; i < data.result.length; i++){
+					$('#cummunityListTable')
+					.append($('<tr></tr>')
+								.attr('data-pk',data.result[i].interestCommunityNo)
+								.append($('<td>' + data.result[i].targetPeopleName + '</td>'))
+								.append($('<td>' + data.result[i].interestCommunityName + '</td>'))
+								.append($('<td>' + data.result[i].interestDomain + '</td>'))
+								.append($('<td>' + data.result[i].interestArea + '</td>'))
+								.append($('<td>' + data.result[i].createDate + '</td>'))
+								.append($('<td>' + data.result[i].interestCommunityContent + '</td>'))
+								.append($('<td>' + data.result[i].count + '</td>'))
+								.append($('<td>' + data.result[i].ownerName + '</td>'))
+								);		
+				}
+			} else {
+				alert("서버에서 데이터를 가져오는데 실패했습니다.");
+				debug(data.message);
+			}
+		}
+	});
+}
+</script>
+
+<script >
+localStorage.setItem('divId','communityMappingInfoList');
+</script>
+
+<div id="communityList">
+	<table id="cummunityListTable" class='commListTableCSS'>
+		<tr>
+			<th>정보이용대상</th>
+			<th>커뮤니티 명</th>
+			<th>관심분야</th>
+			<th>관심지역</th>
+			<th>활동 시작 일</th>
+			<th>커뮤니티 설명</th>
+			<th>등록 글</th>
+			<th>관리자</th>
+		</tr>
+	</table>
+</div>
+<!-- 커뮤니티-->

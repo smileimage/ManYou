@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.MainDao">
+	<!--<cache></cache> -->
+
+	<resultMap id="MainContextList" type="MainContextList">
+		<id property="miNo" column="MI_NO" />
+		<result property="fbName" column="FB_NAME" />
+		<result property="fbUid" column="FB_UID" />
+		<result property="address" column="ADDRESS" />
+		<result property="miTitle" column="MI_TITLE" />
+		<result property="miContext" column="MI_CONTEXT" />
+		<result property="miDate" column="MI_DATE" />
+		<result property="pathName" column="PATH_NAME" />
+		<result property="fileMask" column="FILE_MASK" />
+		<result property="fileSeq" column="Min(general_board_file.FILE_SEQ)" />
+		<result property="investiItemName" column="INVESTI_ITEM_NAME" />
+		<result property="investiItemType" column="INVESTI_ITEM_TYPE" />
+		<result property="ansTypeItemName" column="ANS_TYPE_ITEM_NAME" />
+		<result property="interestCommunityName" column="INTEREST_COMMUNITY_NAME" />
+	</resultMap>
+
+	<select id="selectMainContextList" parameterType="map"
+		resultMap="MainContextList">
+		SELECT
+		mapping_info.MI_NO,
+		interest_community.INTEREST_COMMUNITY_NAME,
+		members.FB_NAME,
+		members.FB_UID,
+		mapping_info.MI_TITLE,
+		investi_item.INVESTI_ITEM_TYPE,
+		investi_item.INVESTI_ITEM_NAME,
+		ans_type_item.ANS_TYPE_ITEM_NAME,
+		general_board_file.PATH_NAME,
+		general_board_file.FILE_MASK,
+		Min(general_board_file.FILE_SEQ),
+		mapping_info.MI_DATE,
+		mapping_info.ADDRESS,
+		mapping_info.MI_CONTEXT
+		FROM
+		interest_community
+		INNER JOIN ((investi_item INNER JOIN
+		target_investi_item ON
+		investi_item.INVESTI_ITEM_NO =
+		target_investi_item.INVESTI_ITEM_NO)
+		INNER JOIN (((members INNER JOIN
+		mapping_info ON members.FB_UID =
+		mapping_info.FB_UID)
+		INNER JOIN
+		(ans_type_item INNER JOIN
+		investi_item_ans ON
+		ans_type_item.ANS_TYPE_ITEM_NO =
+		investi_item_ans.ANS_TYPE_ITEM_NO) ON
+		mapping_info.MI_NO =
+		investi_item_ans.MI_NO)
+		LEFT JOIN
+		general_board_file ON mapping_info.MI_NO =
+		general_board_file.GB_NO) ON
+		(target_investi_item.INTEREST_COMMUNITY_NO =
+		investi_item_ans.INTEREST_COMMUNITY_NO)
+		AND
+		(target_investi_item.INVESTI_ITEM_NO =
+		investi_item_ans.INVESTI_ITEM_NO)) ON
+		interest_community.INTEREST_COMMUNITY_NO =
+		target_investi_item.INTEREST_COMMUNITY_NO
+		<choose>
+			<when test='interestCommunityNo == 0'>
+				<if test='investiItemType != null'>
+					where investi_item_type = #{investiItemType}
+				</if>
+			</when>
+			<when test='interestCommunityNo > 0'>
+				where interest_community.INTEREST_COMMUNITY_NO = #{interestCommunityNo}
+				<if test='investiItemType != null'>
+					and investi_item_type = #{investiItemType}
+				</if>
+			</when>
+		</choose>
+		Group BY mapping_info.MI_NO
+		ORDER BY mapping_info.MI_NO
+		DESC
+		limit #{pageStartIndex}, #{pageSize}
+	</select>
+
+	<!-- detail start -->
+	<resultMap id="MainInfoListDetailMap" type="MainInfoListDetail">
+		<id property="miNo" column="MI_NO" />
+		<result property="fbName" column="FB_NAME" />
+		<result property="fbUid" column="FB_UID" />
+		<result property="fbPhotoPath" column="FB_PHOTO_PATH" />
+		<result property="address" column="ADDRESS" />
+		<result property="miTitle" column="MI_TITLE" />
+		<result property="miContext" column="MI_CONTEXT" />
+		<result property="miDate" column="MI_DATE" />
+		<result property="interestCommunityName" column="INTEREST_COMMUNITY_NAME" />
+		<result property="interestCommunityNo" column="INTEREST_COMMUNITY_NO" />
+	</resultMap>
+
+	<select id="selectOneContext" parameterType="int"
+		resultMap="MainInfoListDetailMap">
+		SELECT mapping_info.MI_NO, members.FB_UID,
+		members.FB_PHOTO_PATH,
+		members.FB_NAME, mapping_info.MI_DATE,
+		mapping_info.MI_TITLE,
+		mapping_info.MI_CONTEXT, mapping_info.ADDRESS,
+		mapping_info.LAT,
+		mapping_info.LNG,
+		interest_community.INTEREST_COMMUNITY_NAME,
+		interest_community.INTEREST_COMMUNITY_NO
+		FROM (interest_community INNER
+		JOIN target_investi_item ON
+		interest_community.INTEREST_COMMUNITY_NO =
+		target_investi_item.INTEREST_COMMUNITY_NO) INNER JOIN (members INNER
+		JOIN mapping_info ON members.FB_UID = mapping_info.FB_UID) ON
+		target_investi_item.INTEREST_COMMUNITY_NO =
+		mapping_info.INTEREST_COMMUNITY_NO
+		WHERE
+		(((mapping_info.MI_NO)=#{value})) group by MI_NO;
+	</select>
+
+	<resultMap id="MainInfoInvestiDetailMap" type="MainInfoListDetail">
+		<id property="miNo" column="MI_NO" />
+		<result property="investiItemName" column="INVESTI_ITEM_NAME" />
+		<result property="investiItemType" column="INVESTI_ITEM_TYPE" />
+		<result property="investiItemNo" column="INVESTI_ITEM_NO" />
+		<result property="ansTypeItemName" column="ANS_TYPE_ITEM_NAME" />
+		<result property="ansTypeItemNo" column="ANS_TYPE_ITEM_NO" />
+		<result property="interestCommunityName" column="INTEREST_COMMUNITY_NAME" />
+		<result property="interestCommunityNo" column="INTEREST_COMMUNITY_NO" />
+	</resultMap>
+
+	<select id="selectInvestiItemList" parameterType="int"
+		resultMap="MainInfoInvestiDetailMap">
+		SELECT investi_item_ans.MI_NO,
+		investi_item.INVESTI_ITEM_TYPE,
+		investi_item.INVESTI_ITEM_NAME,
+		investi_item_ans.INVESTI_ITEM_NO,
+		investi_item_ans.ANS_TYPE_ITEM_NO,
+		ans_type_item.ANS_TYPE_ITEM_NAME
+		FROM ans_type_item INNER JOIN
+		((investi_item INNER JOIN
+		target_investi_item ON
+		investi_item.INVESTI_ITEM_NO =
+		target_investi_item.INVESTI_ITEM_NO)
+		INNER JOIN investi_item_ans ON
+		(target_investi_item.INTEREST_COMMUNITY_NO =
+		investi_item_ans.INTEREST_COMMUNITY_NO) AND
+		(target_investi_item.INVESTI_ITEM_NO =
+		investi_item_ans.INVESTI_ITEM_NO)) ON ans_type_item.ANS_TYPE_ITEM_NO =
+		investi_item_ans.ANS_TYPE_ITEM_NO
+		WHERE
+		(((investi_item_ans.MI_NO)=#{value}));
+	</select>
+
+	<resultMap id="detailSelectPhotoListMap" type="GeneralBoardFile">
+		<id property="gbNo" column="GB_NO" />
+		<result property="fileSeq" column="FILE_SEQ" />
+		<result property="pathName" column="PATH_NAME" />
+		<result property="fileName" column="FILE_NAME" />
+		<result property="fileMask" column="FILE_MASK" />
+		<result property="fileSize" column="FILE_SIZE" />
+		<result property="fileComment" column="FILE_COMMENT" />
+		<result property="fileregisterDate" column="FILEREGISTER_DATE" />
+	</resultMap>
+
+	<select id="selectPhotosList" parameterType="int"
+		resultMap="detailSelectPhotoListMap">
+		select GB_NO, FILE_SEQ, PATH_NAME, FILE_NAME, FILE_MASK,
+		FILE_SIZE,
+		FILE_COMMENT, FILEREGISTER_DATE from general_board_file
+		where
+		GB_NO=#{value} and TABLE_NAME='mappingInfo'
+		ORDER BY FILE_SEQ ASC
+	</select>
+	<!-- detail end -->
+
+	<delete id="deleteMappingInfo" parameterType="int">
+		delete from
+		mapping_info where MI_NO = #{miNo}
+	</delete>
+
+	<delete id="deleteInvestiItemAnsWithMapping" parameterType="int">
+		delete from investi_item_ans where MI_NO = #{miNo}
+	</delete>
+
+	<delete id="deleteReplyWithMapping" parameterType="int">
+		delete from
+		reply where MI_NO = #{miNo}
+	</delete>
+	
+	<delete id="deletePointWithMapping" parameterType="map">
+		delete p from point_history as p INNER JOIN ( 
+		select Max(POINT_NO) as no FROM point_history where FB_UID=#{fbUid} and point=10 and POINT_DATE LIKE #{date} ) as r 
+		on p.POINT_NO = r.no;
+	</delete>
+
+	<delete id="deletePhotosWithMapping" parameterType="int">
+		delete from
+		general_board_file where GB_NO = #{miNo} and TABLE_NAME='mappingInfo'
+	</delete>
+
+	<delete id="deleteGoodWithMapping" parameterType="int">
+		delete from
+		good where MI_NO = #{miNo}
+	</delete>
+
+	<update id="updateMappingInfo" parameterType="MappingInfo">
+		update mapping_info
+		set MI_TITLE=#{miTitle}, MI_CONTEXT=#{miContext},
+		ADDRESS=#{address}, LAT=#{lat}, LNG=#{lng}
+		where MI_NO=#{miNo}
+	</update>
+
+	<insert id="insertMappingInfo" parameterType="MappingInfo"
+		useGeneratedKeys="true" keyProperty="miNo">
+		INSERT INTO
+		mapping_info(
+		INTEREST_COMMUNITY_NO,
+		MI_DATE,
+		LNG,
+		LAT,
+		ADDRESS,
+		MI_TITLE,
+		MI_CONTEXT,
+		MI_PROPOSE,
+		FB_UID)
+		VALUES(
+		#{interestCommunityNo},
+		now(),
+		#{lng},
+		#{lat},
+		#{address},
+		#{miTitle},
+		#{miContext},
+		#{miPropose},
+		#{fbUid})
+	</insert>
+
+	<insert id="insertPointHistory" parameterType="PointHistory">
+		INSERT INTO
+		point_history(
+		POINT_DATE,
+		REASON,
+		POINT,
+		FB_UID)
+		values(
+		now(),
+		#{reason},
+		#{point},
+		#{fbUid}
+		)
+	</insert>
+
+	<insert id="insertInvestiItemAns" parameterType="InvestiItemAns">
+		INSERT INTO
+		investi_item_ans(
+		MI_NO,
+		INTEREST_COMMUNITY_NO,
+		INVESTI_ITEM_NO,
+		ANS_TYPE_ITEM_NO
+		)
+		values(#{miNo},
+		#{interestCommunityNo},
+		#{investiItemNo},
+		#{ansTypeItemNo})
+	</insert>
+
+	<select id="getReplyList" parameterType="int" resultType="Reply">
+		select
+		reply.re_no as reNo,
+		reply.re_context as reContext,
+		reply.mi_no as miNo,
+		reply.fb_uid as fbUid,
+		reply.re_seq as reSeq,
+		reply.re_date as reDate,
+		members.FB_NAME as fbName
+		from members inner join reply on
+		members.FB_UID = reply.FB_UID
+		where mi_no = #{value} ORDER BY re_seq asc
+	</select>
+
+
+	<insert id="addGood" parameterType="Good" useGeneratedKeys="true"
+		keyProperty="goodNo">
+		insert into
+		good(MI_NO,FB_UID)
+		values(#{miNo}, #{fbUid})
+	</insert>
+
+	<delete id="deleteGood" parameterType="int">
+		delete from good where GOOD_NO = #{goodNo}
+	</delete>
+
+	<select id="goodCheck" parameterType="Good" resultType="Good">
+		select
+		count(*) as count,GOOD_NO as goodNo from good where MI_NO = #{miNo}
+		and FB_UID = #{fbUid}
+	</select>
+
+	<insert id="addReply" parameterType="Reply">
+		insert into
+		reply(RE_CONTEXT, MI_NO, FB_UID, RE_SEQ, RE_DATE)
+		values(#{reContext},
+		#{miNo}, #{fbUid}, #{reSeq}, NOW())
+	</insert>
+
+
+	<resultMap id="Reply" type="Reply">
+		<id property="reNo" column="RE_NO" />
+		<result property="reContext" column="RE_CONTEXT" />
+		<result property="miNo" column="MI_NO" />
+		<result property="fbUid" column="FB_UID" />
+		<result property="reLvl" column="RE_LVL" />
+		<result property="reSeq" column="RE_SEQ" />
+		<result property="reDate" column="RE_DATE" />
+	</resultMap>
+
+	<select id="getReplySeq" parameterType="int" resultType="Reply">
+		select
+		RE_SEQ as reSeq from reply where MI_NO = #{value} ORDER BY re_seq DESC
+		LIMIT 0,1
+	</select>
+
+	<delete id="deleteReply" parameterType="int">
+		delete from reply where RE_NO = #{reNo}
+	</delete>
+
+	<insert id="insertFile" parameterType="GeneralBoardFile">
+		INSERT INTO
+		general_board_file(
+		GB_NO,
+		FILE_NAME,
+		FILE_MASK,
+		FILE_SIZE,
+		DOWNLOAD_COUNT,
+		FILEREGISTER_DATE,
+		PATH_NAME,
+		TABLE_NAME,
+		FILE_COMMENT
+		)
+		VALUES(
+		#{gbNo},
+		#{fileName},
+		#{fileMask},
+		#{fileSize},
+		#{downloadCount},
+		now(),
+		#{pathName},
+		#{tableName},
+		#{fileComment}
+		)
+	</insert>
+
+	<select id="categoryList" resultType="InvestiItem">
+		select INVESTI_ITEM_TYPE as
+		investiItemType from investi_item group by INVESTI_ITEM_TYPE;
+	</select>
+
+	<resultMap id="CategorySelectList" type="CategorySelectList">
+		<id property="miNo" column="MI_NO" />
+		<result property="investiItemType" column="INVESTI_ITEM_TYPE" />
+	</resultMap>
+	
+	<select id="searchCategory" parameterType="map" resultMap="CategorySelectList">
+		SELECT
+		mapping_info.MI_NO,
+		investi_item.INVESTI_ITEM_TYPE,
+		mapping_info.LAT,
+		mapping_info.LNG
+		FROM
+		((mapping_info INNER JOIN investi_item_ans ON mapping_info.MI_NO =
+		investi_item_ans.MI_NO)
+		INNER JOIN target_investi_item ON investi_item_ans.INVESTI_ITEM_NO =
+		target_investi_item.INVESTI_ITEM_NO)
+		INNER JOIN investi_item ON target_investi_item.INVESTI_ITEM_NO =
+		investi_item.INVESTI_ITEM_NO
+		where
+		investi_item.INVESTI_ITEM_TYPE = #{investiItemType}
+		<if test='interestCommunityNo > 0 '>
+		and mapping_info.INTEREST_COMMUNITY_NO = #{interestCommunityNo}
+		</if>
+		group by
+		mapping_info.MI_NO;
+	</select>
+
+	<resultMap id="AllMarkerList" type="AllMarkerList">
+		<id property="miNo" column="MI_NO" />
+		<result property="investiItemType" column="INVESTI_ITEM_TYPE" />
+	</resultMap>
+	<select id="allMarkerList" parameterType="map" resultMap="AllMarkerList">
+		SELECT
+		mapping_info.MI_NO,
+		mapping_info.LNG,
+		mapping_info.MI_TITLE as miTitle,
+		mapping_info.ADDRESS,
+		mapping_info.LAT,
+		investi_item.INVESTI_ITEM_TYPE
+		FROM (mapping_info INNER JOIN investi_item_ans ON mapping_info.MI_NO =
+		investi_item_ans.MI_NO)
+		INNER JOIN (investi_item INNER JOIN target_investi_item ON
+		investi_item.INVESTI_ITEM_NO = target_investi_item.INVESTI_ITEM_NO)
+		ON investi_item_ans.INVESTI_ITEM_NO =
+		target_investi_item.INVESTI_ITEM_NO
+		<if test='interestCommunityNo > 0'>
+		    where mapping_info.INTEREST_COMMUNITY_NO = #{interestCommunityNo}
+		</if>
+		group by mapping_info.MI_NO;
+	</select>
+	
+	<select id="countPhotoNumber" parameterType="int" resultType="int">
+		select
+		count(GB_NO) from general_board_file where GB_NO = #{value}
+	</select>
+	
+	<select id="getManagerCheck" parameterType="String" resultType="int">
+		SELECT 
+		INTEREST_COMMUNITY_NO 
+		FROM 
+		interest_community
+		where OWNER_UID = #{fbUid}
+	</select>
+	
+	<select id="countMaxGbNo" resultType="int">
+		select IFNULL(Max(GB_NO),0) from general_board_file
+	</select>
+</mapper>
